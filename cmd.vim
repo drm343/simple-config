@@ -1,5 +1,5 @@
 " use tagbar for C language
-autocmd FileType c :map <F1> :TagbarToggle<CR>
+nmap <F1> :TagbarToggle<CR>
 
 " save file
 nmap <F2> :w!<CR>

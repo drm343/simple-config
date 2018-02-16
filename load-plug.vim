@@ -33,3 +33,6 @@ Plug 'tpope/vim-fugitive'
 Plug 'arkwright/vim-manhunt'
 " git branch
 Plug 'sodapopcan/vim-twiggy'
+
+" brackets
+Plug 'jiangmiao/auto-pairs'
