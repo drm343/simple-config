@@ -33,3 +33,6 @@ filetype plugin indent on
 
 " Run deoplete when startup. Must add this line for deoplete.
 let g:deoplete#enable_at_startup = 1
+
+" Fix autocomplete for supertab.
+set complete+=k

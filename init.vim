@@ -11,3 +11,6 @@ source $HOME/.config/nvim/user.vim
 
 " submode for group command
 source $HOME/.config/nvim/submode.vim
+
+" load language dictionary
+source $HOME/.config/nvim/programming-language.vim

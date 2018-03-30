@@ -12,9 +12,7 @@ nmap <F4> :q!<CR>
 
 " F5 extend key
 "
-" use make for C language
-autocmd FileType c :nmap <F5> :w<CR>:make<CR><CR><CR>
-" use BROWSER for C language
+" use BROWSER for html
 autocmd FileType html :map <F5> :!firefox %<CR> "
 
 " insert datetime to file
