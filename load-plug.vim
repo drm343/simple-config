@@ -36,3 +36,6 @@ Plug 'sodapopcan/vim-twiggy'
 
 " brackets
 Plug 'jiangmiao/auto-pairs'
+
+" Formated
+Plug 'rhysd/vim-clang-format'
