@@ -38,6 +38,11 @@ Install a plugin that simple and easy to use. And vim will be a great EDITOR you
 
 ## Install and Uninstall
 
+### Required
+
+* editorconfig
+* global
+
 ### Install
 #### 1. Clone this repo to $HOME/.config/nvim.
 

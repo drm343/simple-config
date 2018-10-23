@@ -12,6 +12,8 @@ Plug 'rafi/awesome-vim-colorschemes'
 " complete file
 Plug 'ajh17/VimCompletesMe'
 
+" Coding Style
+Plug 'editorconfig/editorconfig-vim'
 
 " a good ui for command, file search and open
 Plug 'Shougo/denite.nvim'
