@@ -1,5 +1,5 @@
 let g:menus.f = {
-            \ 'description': 'f - File Mode'
+            \ 'description': 'f - file mode'
             \ }
 let g:menus.f.command_candidates = [
             \ ['s - search and open file', 'Denite file/rec'],
