@@ -1,15 +1,6 @@
 " use tagbar for C language
 nmap <F1> :TagbarToggle<CR>
 
-" save file
-nmap <F2> :w!<CR>
-
-" save file and quit
-nmap <F3> :wq!<CR>
-
-" not save and quit
-nmap <F4> :q!<CR>
-
 " F5 extend key
 "
 " use BROWSER for html

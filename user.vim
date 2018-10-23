@@ -12,6 +12,10 @@ set mouse=a
 set hlsearch
 hi Search ctermfg=grey ctermbg=blue
 hi Comment ctermfg=darkcyan
+call denite#custom#option('_', 'highlight_mode_insert', 'CursorLine')
+call denite#custom#option('_', 'highlight_matched_range', 'None')
+call denite#custom#option('_', 'highlight_matched_char', 'None')
+
 
 " default encoding use utf-8
 set encoding=utf-8
@@ -30,9 +34,6 @@ colorscheme deep-space
 " setup colorscheme, need to install syntax check plugin
 syntax enable
 filetype plugin indent on
-
-" Run deoplete when startup. Must add this line for deoplete.
-let g:deoplete#enable_at_startup = 1
 
 " Fix autocomplete for supertab.
 set complete+=k
