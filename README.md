@@ -42,6 +42,7 @@ Install a plugin that simple and easy to use. And vim will be a great EDITOR you
 
 * editorconfig
 * global
+* clangd
 
 ### Install
 #### 1. Clone this repo to $HOME/.config/nvim.

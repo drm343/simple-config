@@ -35,5 +35,6 @@ colorscheme deep-space
 syntax enable
 filetype plugin indent on
 
-" Fix autocomplete for supertab.
-set complete+=k
+" Fix autocomplete for tab complete.
+let g:vcm_direction = 'p'
+let b:vcm_tab_complete = 'omni'

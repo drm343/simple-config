@@ -7,6 +7,10 @@ Plug 'vim-airline/vim-airline'
 " colorschemes
 Plug 'rafi/awesome-vim-colorschemes'
 
+" Language server protocol
+Plug 'prabirshrestha/async.vim'
+Plug 'prabirshrestha/vim-lsp'
+
 " language plugin
 "
 " complete file
@@ -26,6 +30,3 @@ Plug 'jsfaint/gen_tags.vim'
 
 " brackets
 Plug 'jiangmiao/auto-pairs'
-
-" Formated
-Plug 'rhysd/vim-clang-format'
