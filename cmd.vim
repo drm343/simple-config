@@ -21,3 +21,6 @@ nmap <F6> :pu=strftime('%Y-%m-%d %H:%M:%S')<CR>
 " full current window
 silent! nunmap +
 nnoremap + <C-w>_<C-w><Bar>
+
+" A good menu ui for user
+nmap <leader>m :Denite menu<CR>

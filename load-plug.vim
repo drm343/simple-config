@@ -7,17 +7,20 @@ Plug 'vim-airline/vim-airline'
 " colorschemes
 Plug 'rafi/awesome-vim-colorschemes'
 
-" search file with vim
-Plug 'ctrlpvim/ctrlp.vim'
-Plug 'tacahiroy/ctrlp-funky'
-
-" custom mode with submode
-Plug 'kana/vim-submode'
-
 " language plugin
 "
 " complete file
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+if has('nvim')
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Plug 'Shougo/deoplete.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
+endif
+
+" a good ui for command, file search and open
+Plug 'Shougo/denite.nvim'
+
 " use tab for complete
 Plug 'ervandew/supertab'
 
