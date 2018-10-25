@@ -1,3 +1,4 @@
-git branch
-git commit
 git status
+git commit
+git branch
+git push
