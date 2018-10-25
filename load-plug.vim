@@ -1,5 +1,9 @@
 " file explorer for vim
 Plug 'scrooloose/nerdtree'
+" eye candy for file
+Plug 'ryanoasis/nerd-fonts'
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+Plug 'ryanoasis/vim-devicons'
 
 
 " status bar

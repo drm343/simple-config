@@ -18,7 +18,7 @@ call denite#custom#option('_', 'highlight_matched_char', 'None')
 
 
 " default encoding use utf-8
-set encoding=utf-8
+set encoding=UTF-8
 set fileencodings=utf8,latin1
 
 " show line number and user can type relativenumber and jump to target line

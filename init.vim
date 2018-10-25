@@ -6,6 +6,9 @@ call plug#end()
 " user config
 source $HOME/.config/nvim/user.vim
 
+" load font symbols
+source $HOME/.config/nvim/symbols.vim
+
 " custom command without grouping
 source $HOME/.config/nvim/cmd.vim
 
