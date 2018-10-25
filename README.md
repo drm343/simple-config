@@ -1,6 +1,10 @@
 # simple-config
 Config for bash
 
+## Required
+
+* fzy
+
 ## Install
 
 ### 1. Clone this repo to your ~/.config
