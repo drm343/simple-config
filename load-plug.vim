@@ -1,5 +1,6 @@
-" a best file explorer in vim
-Plug 'jeetsukumaran/vim-filebeagle'
+" file explorer for vim
+Plug 'scrooloose/nerdtree'
+
 
 " status bar
 Plug 'vim-airline/vim-airline'

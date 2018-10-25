@@ -3,7 +3,7 @@ let g:menus.f = {
             \ }
 let g:menus.f.command_candidates = [
             \ ['s - search and open file', 'Denite file/rec'],
-            \ ['b - File Beagar', 'FileBeagle'],
+            \ ['nt - NERDTree', 'NERDTreeToggle'],
             \ ]
 
 let g:menus.cf = {

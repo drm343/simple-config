@@ -1,6 +1,9 @@
 " use tagbar for C language
 nmap <F1> :TagbarToggle<CR>
 
+" open file from file manager
+nmap <F2> :NERDTreeToggle<CR>
+
 " F5 extend key
 "
 " use BROWSER for html
