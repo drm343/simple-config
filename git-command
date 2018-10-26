@@ -1,4 +1,5 @@
 git status
+git diff
 git commit
 git branch
 git push
