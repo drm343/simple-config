@@ -1,7 +1,6 @@
 " file explorer for vim
 Plug 'scrooloose/nerdtree'
 " eye candy for file
-Plug 'ryanoasis/nerd-fonts'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'ryanoasis/vim-devicons'
 
@@ -12,14 +11,12 @@ Plug 'vim-airline/vim-airline'
 " colorschemes
 Plug 'rafi/awesome-vim-colorschemes'
 
-" Language server protocol
-Plug 'prabirshrestha/async.vim'
-Plug 'prabirshrestha/vim-lsp'
-
 " language plugin
 "
 " complete file
-Plug 'ajh17/VimCompletesMe'
+Plug 'vim-scripts/L9'
+Plug 'vim-scripts/AutoComplPop'
+
 
 " Coding Style
 Plug 'editorconfig/editorconfig-vim'

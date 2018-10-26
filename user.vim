@@ -34,7 +34,3 @@ colorscheme deep-space
 " setup colorscheme, need to install syntax check plugin
 syntax enable
 filetype plugin indent on
-
-" Fix autocomplete for tab complete.
-let g:vcm_direction = 'p'
-let b:vcm_tab_complete = 'omni'

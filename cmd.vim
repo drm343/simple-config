@@ -18,3 +18,6 @@ nnoremap + <C-w>_<C-w><Bar>
 
 " A good menu ui for user
 nmap <leader>m :Denite menu<CR>
+
+" Tab complet
+inoremap <tab> <C-n>

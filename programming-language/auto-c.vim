@@ -1,7 +1,10 @@
 function s:use_c()
     " use make for C language
-    "autocmd FileType c :nmap <F5> :w<CR>:gmake<CR><CR><CR>
-    nmap <F5> :w<CR>:gmake<CR><CR><CR>
+    if executable('gmake')
+        nmap <F3> :w<CR>:gmake<CR><CR><CR>
+    elseif executable('make')
+        nmap <F3> :w<CR>:make<CR><CR><CR>
+    endif
 
     set dictionary+=$HOME/.config/nvim/programming-language/c.txt
 endfunction
