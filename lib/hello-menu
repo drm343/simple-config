@@ -1,0 +1,17 @@
+# hello-menu.sh
+#
+# Description: hello mode menu
+#
+
+help () {
+    desk
+}
+
+hello-menu () {
+    local command=`echo "hello
+help
+exit" | fzf`
+    $command
+}
+
+alias m='hello-menu'

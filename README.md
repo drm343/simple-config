@@ -3,7 +3,6 @@ Config for bash
 
 ## Required
 
-* fzy
 
 ## Install
 
@@ -11,11 +10,11 @@ Config for bash
 
 * git clone git@github.com:drm343/simple-config.git
 
-### 2. Run bin/install.sh in simple-config
+### 2. Run scripts/install.sh in simple-config
 
 * cd .config/simple-config
 
-* bash ./bin/install.sh
+* bash ./scripts/install.sh
 
 This will backup your origin .bashrc to .bashrc.bk, then source it in .bashrc.
 

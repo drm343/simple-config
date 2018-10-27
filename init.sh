@@ -1,12 +1,20 @@
 #!/usr/bin/env bash
+export SIMPLE_CONFIG=$HOME/.config/simple-config
+export PATH=$SIMPLE_CONFIG/bin:"$PATH"
+. $SIMPLE_CONFIG/config
 
-THEME=easy
 
-bind 'set show-all-if-ambiguous on'
-bind 'TAB:menu-complete'
+# Use for desk project
+export DESK_DESKS_DIR=$SIMPLE_CONFIG/desks
+# Load plugin for bash complete
+. $SIMPLE_CONFIG/submodules/desk/shell_plugins/bash/desk
 
-. $HOME/.config/simple-config/fzy-menu.sh
-. $HOME/.config/simple-config/bash_aliases.sh
+# Load lib for parameter
+. $HOME/.config/simple-config/lib/dispatch.sh
+
+# Load fzf menu
+. $SIMPLE_CONFIG/lib/fzf-menu.sh
 
 # thanks for http://simple-configrcgenerator.com/
-. $HOME/.config/simple-config/themes/$THEME
+. $SIMPLE_CONFIG/submodules/shml/shml.sh
+. $SIMPLE_CONFIG/themes/$THEME

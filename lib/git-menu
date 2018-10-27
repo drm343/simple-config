@@ -1,0 +1,28 @@
+# git-menu.sh
+#
+# Description: git mode menu
+#
+
+help () {
+    desk
+    echo '
+You can use menu for git.
+But need to enhance Interaction.'
+}
+
+
+function git-menu () {
+    local result=`echo "git status
+git diff
+git log
+git commit
+git branch
+git push
+git init
+help
+exit" | fzf`
+    $result
+}
+
+
+alias m='git-menu'
