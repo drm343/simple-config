@@ -7,3 +7,6 @@
 [submodule "submodules/fzf"]
 	path = submodules/fzf
 	url = https://github.com/junegunn/fzf.git
+[submodule "submodules/devicons-shell"]
+	path = submodules/devicons-shell
+	url = git@github.com:ryanoasis/devicons-shell.git

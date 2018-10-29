@@ -6,7 +6,7 @@ function fzf-history () {
     history | cut -c 8- | fzf
 }
 
-function fzf-cd () {
+function fzf-cd-home () {
     cd "$(find "$HOME" -type d | fzf)"
 }
 
@@ -14,20 +14,30 @@ function fzf-cd-pwd () {
     cd "$(find "`pwd`" -type d | fzf)"
 }
 
-function git-clone-repo () {
-    read -p "repo-url: " repo
-    git clone $repo
+function git-mode () {
+    desk go git
 }
 
-function change-mode () {
-    desk go `desk list | fzf | cut -d " " -f 1`
+function hello-mode () {
+    #`desk list | fzf | cut -d " " -f 1`
+    desk go hello
+}
+
+function edit-file () {
+    editor $(fzf)
+}
+
+function reload-menu() {
+    source ~/.bashrc
 }
 
 function fzf-menu () {
     local command=`echo "fzf-cd-pwd
-fzf-cd
-change-mode
-git-clone-repo
+fzf-cd-home
+edit-file
+git-mode
+reload-menu
+hello-mode
 fzf-history" | fzf`
     $command
 }

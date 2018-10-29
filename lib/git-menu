@@ -10,6 +10,11 @@ You can use menu for git.
 But need to enhance Interaction.'
 }
 
+function git-clone-repo () {
+    read -p "repo-url: " repo
+    git clone $repo
+}
+
 
 function git-menu () {
     local result=`echo "git status
@@ -18,6 +23,7 @@ git log
 git commit
 git branch
 git push
+git-clone-repo
 git init
 help
 exit" | fzf`
