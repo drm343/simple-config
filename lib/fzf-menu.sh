@@ -27,7 +27,11 @@ function vim-mode () {
 }
 
 function edit-file () {
-    editor $(fzf)
+    local local_file=$(fzf)
+    if [ -e "$local_file" ];
+    then
+        editor $local_file
+    fi
 }
 
 function reload-menu() {

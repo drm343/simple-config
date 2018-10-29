@@ -6,3 +6,4 @@ bind 'TAB:menu-complete'
 export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'
 
 export PATH="$HOME/PROGRAM/bin:$PATH"
+export VIM_CONFIG="$SIMPLE_CONFIG/plugin/vim"

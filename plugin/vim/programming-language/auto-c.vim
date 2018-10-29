@@ -10,9 +10,9 @@ endfunction
 function s:use_c()
     " use make for C language
     if executable('gmake')
-        nmap <F3> :w<CR>:gmake<CR><CR><CR>
+        nmap <F5> :w<CR>:gmake<CR><CR><CR>
     elseif executable('make')
-        nmap <F3> :w<CR>:make<CR><CR><CR>
+        nmap <F5> :w<CR>:make<CR><CR><CR>
     endif
 
     call s:load_c_menu()
