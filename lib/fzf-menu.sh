@@ -6,11 +6,11 @@ function fzf-history () {
     history | cut -c 8- | fzf
 }
 
-function fzf-cd-home () {
+function cd-home () {
     cd "$(find "$HOME" -type d | fzf)"
 }
 
-function fzf-cd-pwd () {
+function cd-pwd () {
     cd "$(find "`pwd`" -type d | fzf)"
 }
 
@@ -32,8 +32,8 @@ function reload-menu() {
 }
 
 function fzf-menu () {
-    local command=`echo "fzf-cd-pwd
-fzf-cd-home
+    local command=`echo "cd-home
+cd-pwd
 edit-file
 git-mode
 reload-menu
