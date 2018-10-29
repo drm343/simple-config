@@ -21,3 +21,15 @@ nmap <leader>m :Denite menu<CR>
 
 " Tab complet
 inoremap <tab> <C-n>
+
+
+
+fu! OpenTerminal()
+    " open split windows on the topleft
+    topleft split
+    " resize the height of terminal windows to 30
+    resize 30
+    :call term_start('bash', {'curwin' : 1, 'term_finish' : 'close'})
+endf
+
+nnoremap <F3> :call OpenTerminal()<CR>
