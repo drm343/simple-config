@@ -1,2 +1,2 @@
 " add c language
-source $HOME/.config/nvim/programming-language/auto-c.vim
+source $VIM_CONFIG/programming-language/auto-c.vim
