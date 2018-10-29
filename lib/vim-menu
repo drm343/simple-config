@@ -1,0 +1,25 @@
+# vim-menu.sh
+#
+# Description: vim mode menu
+#
+
+help () {
+    desk
+    echo '
+Use this for your vim.'
+}
+
+function edit-file () {
+    editor $(fzf)
+}
+
+
+function vim-menu () {
+    local result=`echo "edit-file
+help
+exit" | fzf`
+    $result
+}
+
+
+alias m='vim-menu'

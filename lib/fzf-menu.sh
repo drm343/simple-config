@@ -19,8 +19,11 @@ function git-mode () {
 }
 
 function hello-mode () {
-    #`desk list | fzf | cut -d " " -f 1`
     desk go hello
+}
+
+function vim-mode () {
+    desk go vim
 }
 
 function edit-file () {
@@ -36,6 +39,7 @@ function fzf-menu () {
 cd-pwd
 edit-file
 git-mode
+vim-mode
 reload-menu
 hello-mode
 fzf-history" | fzf`
