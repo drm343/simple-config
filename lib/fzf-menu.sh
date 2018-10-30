@@ -26,6 +26,10 @@ function vim-mode () {
     desk go vim
 }
 
+function stow-mode () {
+    desk go stow
+}
+
 function edit-file () {
     local local_file=$(fzf)
     if [ -e "$local_file" ];
@@ -45,6 +49,7 @@ edit-file
 git-mode
 vim-mode
 reload-menu
+stow-mode
 hello-mode
 fzf-history" | fzf`
     $command

@@ -1,16 +1,15 @@
 #!/usr/bin/env bash
+bind 'set show-all-if-ambiguous on'
+bind 'TAB:menu-complete'
+
 export SIMPLE_CONFIG=$HOME/.config/simple-config
-export PATH=$SIMPLE_CONFIG/bin:"$PATH"
-. $SIMPLE_CONFIG/config
+. $SIMPLE_CONFIG/config.sh
 
-
-# Use for desk project
-export DESK_DESKS_DIR=$SIMPLE_CONFIG/desks
 # Load plugin for bash complete
 . $SIMPLE_CONFIG/submodules/desk/shell_plugins/bash/desk
 
 # Load lib for parameter
-. $HOME/.config/simple-config/lib/dispatch.sh
+. $SIMPLE_CONFIG/lib/dispatch.sh
 
 # Load fzf menu
 . $SIMPLE_CONFIG/lib/fzf-menu.sh
@@ -22,19 +21,19 @@ export DESK_DESKS_DIR=$SIMPLE_CONFIG/desks
 
 # if the command-not-found package is installed, use it
 if [ -x /usr/lib/command-not-found -o -x /usr/share/command-not-found/command-not-found ]; then
-	function command_not_found_handle {
-	        # check because c-n-f could've been removed in the meantime
-                if [ -x /usr/lib/command-not-found ]; then
-		   /usr/lib/command-not-found -- "$1"
-                   return $?
-                elif [ -x /usr/share/command-not-found/command-not-found ]; then
-		   /usr/share/command-not-found/command-not-found -- "$1"
-                   return $?
-		else
-		   printf "%s: command not found\n" "$1" >&2
-		   return 127
-		fi
-	}
+  function command_not_found_handle {
+    # check because c-n-f could've been removed in the meantime
+    if [ -x /usr/lib/command-not-found ]; then
+      /usr/lib/command-not-found -- "$1"
+      return $?
+    elif [ -x /usr/share/command-not-found/command-not-found ]; then
+      /usr/share/command-not-found/command-not-found -- "$1"
+      return $?
+    else
+      printf "%s: command not found\n" "$1" >&2
+      return 127
+    fi
+  }
 fi
 
 # enable bash completion in interactive shells

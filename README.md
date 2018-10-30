@@ -3,6 +3,7 @@ Config for bash
 
 ## Required
 
+* stow
 
 ## Install
 
