@@ -2,8 +2,12 @@
 bind 'set show-all-if-ambiguous on'
 bind 'TAB:menu-complete'
 
+# Load user config
 export SIMPLE_CONFIG=$HOME/.config/simple-config
 . $SIMPLE_CONFIG/config.sh
+
+# Load user alias
+. $SIMPLE_CONFIG/alias.sh
 
 # Load plugin for bash complete
 . $SIMPLE_CONFIG/submodules/desk/shell_plugins/bash/desk

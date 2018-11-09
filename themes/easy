@@ -1,15 +1,38 @@
 #!/usr/bin/env bash
-USER=$(fgcolor yellow $USER)$(fgcolor end)
+#
+#color: cyan magenta red lightgreen green black lightyellow
+#       white
+
+function set_bg_color () {
+    color_word="$(bgcolor $1)$color_word$(bgcolor end)"
+}
+
+function set_fg_color () {
+    color_word="$(fgcolor $1)$color_word$(fgcolor end)"
+}
+
+
+color_word="$USER"
+set_fg_color yellow
+USER=$color_word
 
 DATE_FROM_FORMAT=`date "+%Y-%m-%d %k:%M %A"`
-DATE=$(fgcolor lightgreen "$DATE_FROM_FORMAT")$(fgcolor end)
-
-FG_RED=$(fgcolor red)
-FG_END=$(fgcolor end)
+color_word="$DATE_FROM_FORMAT"
+set_fg_color lightgreen
+DATE=$color_word
 
 
 if [ -n "$DESK_NAME" ]; then
-    SHOW_ENV="[env:$(bgcolor green)$(fgcolor black)$DESK_NAME$(fgcolor end)$(bgcolor end)]-"
+    color_word=$DESK_NAME
+    set_bg_color green
+    set_fg_color black
+    DESK_NAME=$color_word
+    SHOW_ENV="[env:$DESK_NAME]-"
 fi
 
-export PS1="$USER : $DATE\n$SHOW_ENV[$FG_RED\w$FG_END] > "
+color_word="\w"
+set_bg_color white
+set_fg_color black
+COLOR_PATH=$color_word
+
+export PS1="$USER : $DATE\n$SHOW_ENV[$COLOR_PATH] > "
