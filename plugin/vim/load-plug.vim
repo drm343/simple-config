@@ -32,3 +32,6 @@ Plug 'jsfaint/gen_tags.vim'
 
 " brackets
 Plug 'jiangmiao/auto-pairs'
+
+" Use for agda
+Plug 'derekelkins/agda-vim'
