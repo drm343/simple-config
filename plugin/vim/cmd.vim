@@ -23,7 +23,6 @@ nmap <leader>m :Denite menu<CR>
 inoremap <tab> <C-n>
 
 
-
 fu! OpenTerminal()
     " open split windows on the topleft
     topleft split

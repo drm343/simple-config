@@ -17,7 +17,7 @@ function stow-add () {
     if [ -n "$install_package" ];
     then
         stow -d $PACKAGE -t $PROGRAM -S $install_package
-        cd $INSTALLED && ln -s $PACKAGE/$install_package .
+        pushd $INSTALLED && ln -s $PACKAGE/$install_package . && popd
     fi
     echo $install_package
 }
@@ -27,7 +27,7 @@ function stow-add () {
 function stow-remove () {
     local remove_package=`ls $INSTALLED | fzf`
     stow -d $PACKAGE -t $PROGRAM -D $remove_package
-    cd $INSTALLED && rm $remove_package
+    pushd $INSTALLED && rm $remove_package && popd
 }
 
 
