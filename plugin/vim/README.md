@@ -41,3 +41,4 @@ Install a plugin that simple and easy to use. And vim will be a great EDITOR you
 * editorconfig
 * global
 * clangd
+* vifm

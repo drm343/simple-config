@@ -6,9 +6,6 @@ call plug#end()
 " user config
 source $VIM_CONFIG/user.vim
 
-" load font symbols
-source $VIM_CONFIG/symbols.vim
-
 " custom command without grouping
 source $VIM_CONFIG/cmd.vim
 

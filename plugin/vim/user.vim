@@ -12,9 +12,6 @@ set mouse=a
 set hlsearch
 hi Search ctermfg=grey ctermbg=blue
 hi Comment ctermfg=darkcyan
-call denite#custom#option('_', 'highlight_mode_insert', 'CursorLine')
-call denite#custom#option('_', 'highlight_matched_range', 'None')
-call denite#custom#option('_', 'highlight_matched_char', 'None')
 
 
 " default encoding use utf-8
@@ -34,3 +31,7 @@ colorscheme deep-space
 " setup colorscheme, need to install syntax check plugin
 syntax enable
 filetype plugin indent on
+
+" quickmenu_options
+let g:quickmenu_options = "HL"
+let g:quickmenu_max_width = 300

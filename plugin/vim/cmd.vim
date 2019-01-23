@@ -1,8 +1,8 @@
 " use tagbar for C language
 nmap <F1> :TagbarToggle<CR>
 
-" open file from file manager
-nmap <F2> :NERDTreeToggle<CR>
+" open menu
+nmap <F2> :call g:quickmenu#toggle(0)<CR>
 
 " F5 extend key
 "
@@ -17,7 +17,7 @@ silent! nunmap +
 nnoremap + <C-w>_<C-w><Bar>
 
 " A good menu ui for user
-nmap <leader>m :Denite menu<CR>
+noremap <leader>m :call quickmenu#toggle(0)<cr>
 
 " Tab complet
 inoremap <tab> <C-n>
@@ -32,3 +32,10 @@ fu! OpenTerminal()
 endf
 
 nnoremap <F3> :call OpenTerminal()<CR>
+
+fu! RunShellCommand()
+    let command = getline(line("."))
+    exec "r!" command
+endf
+
+nnoremap <F4> :call RunShellCommand()<CR>
