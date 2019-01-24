@@ -14,3 +14,6 @@ source $VIM_CONFIG/menu.vim
 
 " load language dictionary
 source $VIM_CONFIG/programming-language.vim
+
+" load start screen
+source $VIM_CONFIG/start-screen.vim

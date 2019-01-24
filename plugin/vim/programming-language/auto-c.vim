@@ -21,5 +21,5 @@ function s:use_c()
     call g:quickmenu#append('previous', ':cprev', '上一個錯誤')
 endfunction
 
-let filetype_m='objc'
+"let filetype_m='objc'
 autocmd FileType c,cpp,objc call s:use_c()

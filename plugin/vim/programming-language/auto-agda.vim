@@ -32,7 +32,7 @@ function s:use_agda()
     imap <buffer> \_- ₋
     imap <buffer> \_= ₌
     imap <buffer> \_( ₍
-    ""imap <buffer> \_) ₎
+    imap <buffer> \_) ₎
 
     " Arrows
     imap <buffer> -> →

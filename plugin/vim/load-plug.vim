@@ -1,7 +1,5 @@
 " file explorer for vim
 Plug 'vifm/vifm.vim'
-" start screen
-Plug 'mhinz/vim-startify'
 
 " status bar
 Plug 'vim-airline/vim-airline'

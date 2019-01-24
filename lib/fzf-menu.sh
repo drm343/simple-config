@@ -38,6 +38,11 @@ function edit-file () {
     fi
 }
 
+# open session
+open-session () {
+    editor -S `find ~ -name Session.vim | fzf`
+}
+
 function reload-menu() {
     source ~/.bashrc
 }
@@ -46,6 +51,7 @@ function fzf-menu () {
     local command=`echo "cd-home
 cd-pwd
 edit-file
+open-session
 git-mode
 vim-mode
 reload-menu

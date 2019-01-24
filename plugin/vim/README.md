@@ -1,4 +1,4 @@
-# Not-IDE-config 0.1.0
+# Not-IDE-config 0.2.0
 
 This configuration files follow 3 rule.
 * Vim is not IDE.

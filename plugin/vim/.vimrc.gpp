@@ -1,5 +1,0 @@
-#define CONFIG_PATH \$HOME/.config/simple-config/plugin/vim
-if !exists("$VIM_CONFIG")
-    let $VIM_CONFIG="CONFIG_PATH"
-endif
-source $VIM_CONFIG/init.vim

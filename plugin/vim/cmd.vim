@@ -18,6 +18,7 @@ nnoremap + <C-w>_<C-w><Bar>
 
 " A good menu ui for user
 noremap <leader>m :call quickmenu#toggle(0)<cr>
+noremap <leader>t :call Quickmenu_toggle("tab")<cr>
 
 " Tab complet
 inoremap <tab> <C-n>
@@ -33,9 +34,9 @@ endf
 
 nnoremap <F3> :call OpenTerminal()<CR>
 
-fu! RunShellCommand()
+fu! ReadShellResultCommand()
     let command = getline(line("."))
     exec "r!" command
 endf
 
-nnoremap <F4> :call RunShellCommand()<CR>
+nnoremap <F4> :call ReadShellResultCommand()<CR>
