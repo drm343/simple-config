@@ -11,5 +11,5 @@ prefix=$SIMPLE_CONFIG/submodules/fzf prefix_expand=$SIMPLE_CONFIG/submodules/fzf
 cp $HOME/.vimrc $HOME/.vimrc.bk
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-gpp $SIMPLE_CONFIG/plugin/vim/.vimrc.gpp -o $HOME/.vimrc
+cp $SIMPLE_CONFIG/plugin/vim/.vimrc -o $HOME/.vimrc
 vi +PlugInstall +:q +:q
