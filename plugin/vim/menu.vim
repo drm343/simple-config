@@ -1,9 +1,7 @@
 function! g:Quickmenu_currentAdd(var)
-    if has_key(g:quickmenu_var, a:var) == 0
-        let g:quickmenu_counter = g:quickmenu_counter + 1
-        let g:quickmenu_var[a:var] = g:quickmenu_counter
-        call g:quickmenu#current(g:quickmenu_counter)
-    endif
+    let g:quickmenu_counter = g:quickmenu_counter + 1
+    let g:quickmenu_var[a:var] = g:quickmenu_counter
+    call g:quickmenu#current(g:quickmenu_counter)
 endfunction
 
 function! g:Quickmenu_current(var)
@@ -26,7 +24,7 @@ call g:quickmenu#append('打開舊檔', ':call Quickmenu_toggle("open old file")
 call g:quickmenu#append('緩衝區管理', ':call Quickmenu_toggle("buffer")', '')
 call g:quickmenu#append('檔案', ':call Quickmenu_toggle("file")', '本檔案的操作')
 call g:quickmenu#append('終端機', ':call OpenTerminal()', '打開終端機')
-call g:quickmenu#append('儲存開發狀態', ':mksession!', '儲存成 Session.vim 方便後續恢復開發')
+call g:quickmenu#append('專案', ':call Quickmenu_toggle("project")', '用 session 的方式進行專案管理')
 
 " 檔案
 call g:Quickmenu_currentAdd("file")
@@ -63,3 +61,24 @@ call g:quickmenu#append('新分頁', ':tabnew', '')
 call g:quickmenu#append('下一個分頁', ':tabnext', '')
 call g:quickmenu#append('上一個分頁', ':tabprevious', '')
 call g:quickmenu#append('關閉', ':tabclose', '')
+
+" 專案管理工具
+call g:Quickmenu_currentAdd("project")
+call g:quickmenu#reset()
+call g:quickmenu#header("專案")
+
+function! g:Project_save ()
+    mksession! Project.vim
+    silent!touch Projectx.vim
+    echo "儲存專案成功"
+endfunction
+
+call g:quickmenu#append('儲存開發狀態', ':call Project_save()', '儲存成 Project.vim 方便後續恢復開發')
+
+function! g:Project_config ()
+    tabnew | edit Projectx.vim
+endfunction
+
+call g:quickmenu#append('設定', ':call Project_config()', '修改 Projectx.vim 調整專案設定')
+call g:quickmenu#append('儲存全部檔案', ':wa', '儲存全部修改過的檔案')
+call g:quickmenu#append('關閉全部檔案', ':qa', '關閉全部檔案，如果有修改過未儲存檔案，會無法關閉')

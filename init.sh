@@ -19,7 +19,8 @@ export SIMPLE_CONFIG=$HOME/.config/simple-config
 . $SIMPLE_CONFIG/lib/fzf-menu.sh
 
 # thanks for http://simple-configrcgenerator.com/
-. $SIMPLE_CONFIG/submodules/shml/shml.sh
+. $SIMPLE_CONFIG/plugin/shml/shml.sh
+#. /home/erlin/Software/source/shml/shml.sh
 . $SIMPLE_CONFIG/themes/$THEME
 
 

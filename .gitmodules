@@ -1,9 +1,6 @@
 [submodule "submodules/desk"]
 	path = submodules/desk
 	url = git@github.com:jamesob/desk.git
-[submodule "shml"]
-	path = submodules/shml
-	url = https://github.com/odb/shml.git
 [submodule "submodules/fzf"]
 	path = submodules/fzf
 	url = https://github.com/junegunn/fzf.git

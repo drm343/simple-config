@@ -2,56 +2,56 @@
 #
 # Description: base fzf menu
 #
-function fzf-history () {
+fzf-history () {
     history | cut -c 8- | fzf
 }
 
-function cd-home () {
+cd-home () {
     cd "$(find "$HOME" -type d | fzf)"
 }
 
-function cd-pwd () {
+cd-pwd () {
     cd "$(find "`pwd`" -type d | fzf)"
 }
 
-function git-mode () {
+git-mode () {
     desk go git
 }
 
-function hello-mode () {
+hello-mode () {
     desk go hello
 }
 
-function vim-mode () {
+vim-mode () {
     desk go vim
 }
 
-function stow-mode () {
+stow-mode () {
     desk go stow
 }
 
-function edit-file () {
-    local local_file=$(fzf)
-    if [ -e "$local_file" ];
-    then
-        editor $local_file
-    fi
+
+# use custom vim editor
+editor-mode () {
+    editor -S `find $VIM_CONFIG/session/* | sed "/.*\x.vim/d" | fzf`
 }
 
-# open session
-open-session () {
-    editor -S `find ~ -name Session.vim | fzf`
+
+# use custom vim editor
+project-mode () {
+    editor -S `find ~ -name Project.vim | fzf` `pwd`
 }
 
-function reload-menu() {
+
+reload-menu() {
     source ~/.bashrc
 }
 
-function fzf-menu () {
+fzf-menu () {
     local command=`echo "cd-home
 cd-pwd
-edit-file
-open-session
+editor-mode
+project-mode
 git-mode
 vim-mode
 reload-menu

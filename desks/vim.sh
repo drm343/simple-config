@@ -14,30 +14,32 @@ help () {
 Use this for your vim.'
 }
 
-# edit file with vim
-function edit-file () {
-    local local_file=$(fzf)
-    if [ -e "$local_file" ];
-    then
-        editor $local_file
-    fi
-}
-
 # remove vim plugin
-function plugin-clean () {
+plugin-clean () {
     editor +PlugClean +:q +:q
 }
 
+# update vim plugin
+plugin-update () {
+    editor +PlugUpdate +:q +:q
+}
+
 # install vim plugin
-function plugin-install () {
+plugin-install () {
     editor +PlugInstall +:q +:q
 }
 
+# upgrade vim-plug
+upgrade () {
+    editor +PlugUpgrade +:q +:q
+}
+
 # vim menu
-function vim-menu () {
-    local result=`echo "edit-file
-plugin-install
+vim-menu () {
+    local result=`echo "plugin-install
 plugin-clean
+plugin-update
+upgrade
 help
 exit" | fzf`
     $result

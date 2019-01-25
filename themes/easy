@@ -4,10 +4,12 @@
 #       white
 
 function set_bg_color () {
+    #color_word="\[$(bgcolor $1)\]$color_word\[$(bgcolor end)\]"
     color_word="$(bgcolor $1)$color_word$(bgcolor end)"
 }
 
 function set_fg_color () {
+    #color_word="\[$(fgcolor $1)\]$color_word\[$(fgcolor end)\]"
     color_word="$(fgcolor $1)$color_word$(fgcolor end)"
 }
 

@@ -13,3 +13,7 @@ export PROGRAM=$HOME/PROGRAM
 export SOURCE=$HOME/Software/source
 export PACKAGE=$HOME/Software/package
 export INSTALLED=$HOME/Software/installed
+
+set -o vi
+set editing-mode vi
+set keymap vi-insert
