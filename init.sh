@@ -49,3 +49,10 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
+
+# welcome message
+if $WELCOME; then
+    if [ -z "$DESK_NAME" ]; then
+        desk run tutorial tutorial-main-0
+    fi
+fi

@@ -127,11 +127,10 @@ dialog() {
   done
 }
 
+
 # Foreground (Text)
 ##
 fgcolor() {
-  local __seq_start='\['
-  local __seq_end='\]'
   local __end='\033[39m'
   local __color=$__end # end by default
   case "$1" in
@@ -153,9 +152,9 @@ fgcolor() {
     white|ffffff|fff)    __color='\033[97m';;
   esac
   if test "$2"; then
-    echo -en "$__seq_start$__color$2$__end$__seq_end"
+    echo -en "$__color$2$__end"
   else
-    echo -en "$__seq_start$__color$__seq_end"
+    echo -en "$__color"
   fi
 }
 
@@ -176,8 +175,6 @@ c() {
 # Background
 ##
 bgcolor() {
-  local __seq_start='\['
-  local __seq_end='\]'
   local __end='\033[49m'
   local __color=$__end # end by default
   case "$1" in
@@ -201,9 +198,9 @@ bgcolor() {
   esac
 
   if test "$2"; then
-    echo -en "$__seq_start$__color$2$__end$__seq_end"
+    echo -en "$__color$2$__end"
   else
-    echo -en "$__seq_start$__color$__seq_end"
+    echo -en "$__color"
   fi
 }
 

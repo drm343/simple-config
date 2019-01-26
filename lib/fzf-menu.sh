@@ -22,8 +22,8 @@ hello-mode () {
     desk go hello
 }
 
-vim-mode () {
-    desk go vim
+vim-plugin-mode () {
+    desk go vim-plugin
 }
 
 stow-mode () {
@@ -47,17 +47,50 @@ reload-menu() {
     source ~/.bashrc
 }
 
+
+tutorial() {
+    desk run tutorial tutorial-main-1
+}
+
+
+tutorial-document() {
+    desk run tutorial document
+}
+
+
+setting-config() {
+    editor $SIMPLE_CONFIG/config.sh
+}
+
+
 fzf-menu () {
-    local command=`echo "cd-home
+    if $TUTORIAL; then
+        local command=`echo "cd-home
 cd-pwd
 editor-mode
 project-mode
 git-mode
-vim-mode
+vim-plugin-mode
 reload-menu
 stow-mode
 hello-mode
-fzf-history" | fzf`
+fzf-history
+setting-config
+tutorial
+tutorial-document" | fzf`
+    else
+        local command=`echo "cd-home
+cd-pwd
+editor-mode
+project-mode
+git-mode
+vim-plugin-mode
+reload-menu
+stow-mode
+hello-mode
+fzf-history
+setting-config" | fzf`
+    fi
     $command
 }
 

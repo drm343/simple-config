@@ -4,13 +4,11 @@
 #       white
 
 function set_bg_color () {
-    #color_word="\[$(bgcolor $1)\]$color_word\[$(bgcolor end)\]"
-    color_word="$(bgcolor $1)$color_word$(bgcolor end)"
+    color_word="\[$(bgcolor $1)\]$color_word\[$(bgcolor end)\]"
 }
 
 function set_fg_color () {
-    #color_word="\[$(fgcolor $1)\]$color_word\[$(fgcolor end)\]"
-    color_word="$(fgcolor $1)$color_word$(fgcolor end)"
+    color_word="\[$(fgcolor $1)\]$color_word\[$(fgcolor end)\]"
 }
 
 
@@ -28,8 +26,8 @@ if [ -n "$DESK_NAME" ]; then
     color_word=$DESK_NAME
     set_bg_color green
     set_fg_color black
-    DESK_NAME=$color_word
-    SHOW_ENV="[env:$DESK_NAME]-"
+    PROMPT_DESK_NAME=$color_word
+    SHOW_ENV="[env:$PROMPT_DESK_NAME]-"
 fi
 
 color_word="\w"

@@ -28,7 +28,7 @@ function! Start()
   " a new buffer should be opened which we can then later save.
   nnoremap <buffer><silent> e :enew<CR>
   nnoremap <buffer><silent> i :enew <bar> startinsert<CR>
-  nnoremap <buffer><silent> t :edit $VIM_CONFIG/tutorial-zh_TW.txt<CR>
+  nnoremap <buffer><silent> t :edit $SIMPLE_CONFIG_DOC/vim-tutorial-zh_TW.txt<CR>
   nnoremap <buffer><silent> <leader>m :enew <bar> call g:quickmenu#toggle(0)<CR>
 
 endfunction
