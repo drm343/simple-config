@@ -19,6 +19,7 @@ nnoremap + <C-w>_<C-w><Bar>
 " A good menu ui for user
 noremap <leader>m :call quickmenu#toggle(0)<cr>
 noremap <leader>t :call Quickmenu_toggle("tab")<cr>
+noremap <leader>l :call g:quickmenu#toggle(g:quickmenu_last_counter)<cr>
 
 " Tab complet
 inoremap <tab> <C-n>
@@ -32,11 +33,29 @@ fu! OpenTerminal()
     :call term_start('bash', {'curwin' : 1, 'term_finish' : 'close'})
 endf
 
-nnoremap <F3> :call OpenTerminal()<CR>
-
 fu! ReadShellResultCommand()
     let command = getline(line("."))
     exec "r!" command
 endf
 
 nnoremap <F4> :call ReadShellResultCommand()<CR>
+
+fu! RunVimCommand()
+    let command = getline(line("."))
+    exec command
+endf
+nnoremap <F5> :call RunVimCommand()<CR>
+
+
+fu! g:IncludeSession(plugin)
+    let SESSION_DIR = "$VIM_CONFIG/session/"
+    exec "source" SESSION_DIR . a:plugin
+endf
+
+
+fu! AddIncludeSession()
+    let bash_command='find "$VIM_CONFIG/session/" -name "*x\.vim" -printf "%f\n"'
+    let plugin_name=fzf#run({'source': bash_command, 'down': '50%'})
+    exec 'r!echo "IncludeSession(\"' . get(plugin_name, 0, "") . '\")" '
+endf
+nnoremap <F3> :call AddIncludeSession()<CR>

@@ -9,9 +9,11 @@ function! g:Quickmenu_current(var)
 endfunction
 
 function! g:Quickmenu_toggle(var)
-    call g:quickmenu#toggle(g:quickmenu_var[a:var])
+    let g:quickmenu_last_counter = g:quickmenu_var[a:var]
+    call g:quickmenu#toggle(g:quickmenu_last_counter)
 endfunction
 
+let g:quickmenu_last_counter = -1
 let g:quickmenu_counter = -1
 let g:quickmenu_var = {}
 
@@ -20,6 +22,7 @@ call g:Quickmenu_currentAdd("main")
 call g:quickmenu#reset()
 call g:quickmenu#header("主選單")
 
+"call g:quickmenu#append('切換選單', ':call Quickmenu_toggle("change menu")', '切換主選單')
 call g:quickmenu#append('打開舊檔', ':call Quickmenu_toggle("open old file")', '使用檔案管理器打開舊檔案')
 call g:quickmenu#append('緩衝區管理', ':call Quickmenu_toggle("buffer")', '')
 call g:quickmenu#append('檔案', ':call Quickmenu_toggle("file")', '本檔案的操作')

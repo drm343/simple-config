@@ -31,3 +31,7 @@ Plug 'jiangmiao/auto-pairs'
 
 " buffer control
 Plug 'jlanzarotta/bufexplorer'
+
+
+Plug 'junegunn/fzf.vim'
+Plug 'junegunn/fzf'
