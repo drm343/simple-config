@@ -33,7 +33,7 @@ export EDITOR=vim
 # Use for welcome message (without use motd)
 # set false to close welcome message
 # default: true
-export WELCOME=false
+export WELCOME=true
 
 
 # Use for tutorial message
