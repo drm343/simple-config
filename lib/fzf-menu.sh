@@ -2,10 +2,6 @@
 #
 # Description: base fzf menu
 #
-fzf-history () {
-    history | cut -c 8- | fzf
-}
-
 cd-home () {
     cd "$(find "$HOME" -type d | fzf)"
 }
@@ -62,36 +58,6 @@ setting-config() {
     editor $SIMPLE_CONFIG/config.sh
 }
 
+source $SIMPLE_CONFIG/lib/fzf-menu-status.sh
 
-fzf-menu () {
-    if $TUTORIAL; then
-        local command=`echo "cd-home
-cd-pwd
-editor-mode
-project-mode
-git-mode
-vim-plugin-mode
-reload-menu
-stow-mode
-hello-mode
-fzf-history
-setting-config
-tutorial
-tutorial-document" | fzf`
-    else
-        local command=`echo "cd-home
-cd-pwd
-editor-mode
-project-mode
-git-mode
-vim-plugin-mode
-reload-menu
-stow-mode
-hello-mode
-fzf-history
-setting-config" | fzf`
-    fi
-    $command
-}
-
-alias m='fzf-menu'
+alias m='fzf-menu-switch'

@@ -16,7 +16,7 @@ function! Start()
     \ norelativenumber
 
   " Our message goes here. Mine is simple.
-  read $VIM_CONFIG/screen.txt
+  exec 'read' $VIM_CONFIG . '/screen.txt'
   goto | delete
 
   " When we are done writing out message set the buffer to readonly.

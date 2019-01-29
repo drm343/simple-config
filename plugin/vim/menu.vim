@@ -83,5 +83,6 @@ function! g:Project_config ()
 endfunction
 
 call g:quickmenu#append('設定', ':call Project_config()', '修改 Projectx.vim 調整專案設定')
+call g:quickmenu#append('引入設定', ':call AddIncludeSession()', '加入其他專案的設定')
 call g:quickmenu#append('儲存全部檔案', ':wa', '儲存全部修改過的檔案')
 call g:quickmenu#append('關閉全部檔案', ':qa', '關閉全部檔案，如果有修改過未儲存檔案，會無法關閉')

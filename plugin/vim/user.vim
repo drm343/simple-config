@@ -35,3 +35,8 @@ filetype plugin indent on
 " quickmenu_options
 let g:quickmenu_options = "HL"
 let g:quickmenu_max_width = 300
+
+
+let g:vimwiki_list = [{
+  \ 'template_path': '$HOME/vimwiki/templates',
+  \ 'template_default': 'default'}]

@@ -40,3 +40,9 @@ export WELCOME=true
 # set false to close tutorial message
 # default: true
 export TUTORIAL=true
+
+
+# Use for page fzf-menu
+# set false to close page
+# default: true
+export ENABLE_PAGE=false

@@ -2,7 +2,7 @@
 nmap <F1> :TagbarToggle<CR>
 
 " open menu
-nmap <F2> :call g:quickmenu#toggle(0)<CR>
+nnoremap <F2> :call UseFZFMenu('printf "MyTest\nMain_Menu"')<CR>
 
 " F5 extend key
 "
@@ -37,15 +37,14 @@ fu! ReadShellResultCommand()
     let command = getline(line("."))
     exec "r!" command
 endf
-
 nnoremap <F4> :call ReadShellResultCommand()<CR>
 
+
 fu! RunVimCommand()
-    let command = getline(line("."))
+let command = getline(line("."))
     exec command
 endf
 nnoremap <F5> :call RunVimCommand()<CR>
-
 
 fu! g:IncludeSession(plugin)
     let SESSION_DIR = "$VIM_CONFIG/session/"
@@ -58,4 +57,24 @@ fu! AddIncludeSession()
     let plugin_name=fzf#run({'source': bash_command, 'down': '50%'})
     exec 'r!echo "IncludeSession(\"' . get(plugin_name, 0, "") . '\")" '
 endf
-nnoremap <F3> :call AddIncludeSession()<CR>
+
+
+fu! MyTest()
+    echo "hello"
+endf
+
+
+fu! Main_Menu()
+    call g:Quickmenu_toggle("main")
+endf
+
+
+fu! UseFZFMenu(fzf_menu)
+    let my_command=fzf#run({'source': a:fzf_menu, 'down': '50%'})
+    let my_command=get(my_command, 0, "")
+    if my_command =~ "^$"
+        echo "nothing"
+    else
+        exec ":call" my_command . "()"
+    endif
+endf

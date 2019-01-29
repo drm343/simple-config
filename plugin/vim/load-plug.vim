@@ -35,3 +35,6 @@ Plug 'jlanzarotta/bufexplorer'
 
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/fzf'
+
+" wiki
+Plug 'vimwiki/vimwiki'

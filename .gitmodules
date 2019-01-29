@@ -7,3 +7,6 @@
 [submodule "submodules/devicons-shell"]
 	path = submodules/devicons-shell
 	url = git@github.com:ryanoasis/devicons-shell.git
+[submodule "submodules/fzf-tab"]
+	path = submodules/fzf-tab
+	url = git@github.com:lincheney/fzf-tab-completion.git

@@ -17,11 +17,17 @@ function git-clone-repo () {
     git clone $repo
 }
 
+# use vimdiff for check file
+function git-vimdiff () {
+    local result=`git status | grep modified | awk '{print $2}' | fzf`
+    git difftool -y -t vimdiff HEAD $result
+}
+
 
 # open menu
 function git-menu () {
     local result=`echo "git status
-git diff
+git-vimdiff
 git log
 git commit
 git branch
