@@ -1,3 +1,4 @@
+# User color theme
 THEME=easy
 
 export PATH="$HOME/PROGRAM/bin:$SIMPLE_CONFIG/bin:$PATH"
@@ -10,6 +11,9 @@ export SIMPLE_CONFIG_DOC="$SIMPLE_CONFIG/doc"
 
 # Use for desk project
 export DESK_DESKS_DIR=$SIMPLE_CONFIG/desks
+
+# Use for completion with case insensitive
+bind 'set completion-ignore-case on'
 
 # Use for stow
 export PROGRAM=$HOME/PROGRAM
