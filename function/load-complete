@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+load-complete () {
+    for i in $SIMPLE_CONFIG/completion/*;
+    do
+        . $i;
+    done
+}

@@ -1,22 +1,4 @@
-ecd () {
-    run_ecd () {
-        echo -ne `pwd`
-        result="`ls -al | sed 1d | fzf | awk '{print $NF}'`"
-    }
-
-    if [ ! -z "$1" ]; then
-        cd $1
-    else
-        run_ecd
-
-        while [ ! -z "$result" ]; do
-            cd $result
-            run_ecd
-        done;
-    fi
-}
-
-
+#!/usr/bin/env bash
 ecp () {
     run_ecd () {
         if [ ! -z "$files" ]; then

@@ -21,6 +21,9 @@ export SOURCE=$HOME/Software/source
 export PACKAGE=$HOME/Software/package
 export INSTALLED=$HOME/Software/installed
 
+# Use tab for complete
+bind 'TAB: menu-complete'
+
 # Use vi keymap for bash
 set -o vi
 set keymap vi-insert
@@ -38,15 +41,3 @@ export EDITOR=vim
 # set false to close welcome message
 # default: true
 export WELCOME=true
-
-
-# Use for tutorial message
-# set false to close tutorial message
-# default: true
-export TUTORIAL=true
-
-
-# Use for page fzf-menu
-# set false to close page
-# default: true
-export ENABLE_PAGE=false

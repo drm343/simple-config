@@ -1,4 +1,4 @@
-# vim-plugin.sh
+# vim-plugin-mode.sh
 #
 # Description: vim-plugin mode
 #

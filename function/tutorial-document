@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+tutorial-document() {
+    desk run tutorial-mode document
+}

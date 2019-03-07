@@ -1,4 +1,4 @@
-# stow.sh
+# stow-mode.sh
 #
 # Description: stow menu for your application build from source
 #

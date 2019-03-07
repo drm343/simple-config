@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+cd-pwd () {
+    cd "$(find "`pwd`" -type d | fzf)"
+}

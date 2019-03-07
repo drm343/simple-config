@@ -1,4 +1,4 @@
-# tutorial.sh
+# tutorial-mode.sh
 #
 # Description: tutorial mode
 #

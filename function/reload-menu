@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+reload-menu() {
+    source ~/.bashrc
+}

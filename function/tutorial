@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+tutorial() {
+    desk run tutorial-mode tutorial-main-1
+}

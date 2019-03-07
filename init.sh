@@ -1,7 +1,4 @@
 #!/usr/bin/env bash
-bind 'set show-all-if-ambiguous on'
-bind 'TAB:menu-complete'
-
 # Load user config
 export SIMPLE_CONFIG=$HOME/.config/simple-config
 . $SIMPLE_CONFIG/config.sh
@@ -13,10 +10,13 @@ export SIMPLE_CONFIG=$HOME/.config/simple-config
 . $SIMPLE_CONFIG/submodules/desk/shell_plugins/bash/desk
 
 # Load fzf menu
-. $SIMPLE_CONFIG/lib/fzf-menu.sh
+. $SIMPLE_CONFIG/lib/fzf-menu-2.sh
 
 # Load enhance command
-. $SIMPLE_CONFIG/lib/enhance-command.sh
+for i in $SIMPLE_CONFIG/function/*;
+do
+    . $i
+done
 
 # thanks for http://simple-configrcgenerator.com/
 . $SIMPLE_CONFIG/themes/$THEME
@@ -47,6 +47,7 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
+load-complete
 
 # welcome message
 if $WELCOME; then

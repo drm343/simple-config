@@ -1,4 +1,4 @@
-#! hello.sh
+#! hello-mode.sh
 #
 # Description: hello example
 #
