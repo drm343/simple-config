@@ -1,0 +1,94 @@
+#!/usr/bin/env bash
+PACKAGE=/var/log/packages
+
+help-this () {
+echo $0
+echo "find: search package"
+echo "check: search and read content from a package"
+echo "remove: remove select package"
+echo "all: pass all installed packages as parameter for other command"
+echo "download: download sbo source package"
+echo "build: build sbo package"
+echo "install: install sbo package"
+}
+
+eslackpkg-remove () {
+    # remove "remove" from parameter
+    shift
+
+    select-then-remove () {
+        local result=`ls $PACKAGE | fzf`
+        if [ ! -z "$result" ]; then
+            sudo removepkg $result
+        fi
+    }
+
+    remove-current () {
+        local result=`ls ./*t?z`
+
+        if [ ! -z "$result" ]; then
+            sudo removepkg $result
+        fi
+    }
+
+    case $1 in
+        "current")
+            remove-current
+            ;;
+        "select")
+            select-then-remove
+            ;;
+        *)
+            echo "select: select a installed package and remove"
+            echo "current: remove all package in this directory"
+            ;;
+    esac
+}
+
+
+eslackpkg-download () {
+local file_url=`cat ./*.info | fzf | sed "s/^.*=//" | tr -d "\""`
+local file_name=`basename $file_url`
+curl -L $file_url --output $file_name
+}
+
+
+passing=""
+for i in $@;
+do
+    result=`echo $i | grep "="`
+    if [ ! -z "$result" ]; then
+        passing+="$result "
+    fi
+done
+
+
+case $1 in
+    "find")
+        ls $PACKAGE | fzf
+        ;;
+    "check")
+        vim -m `ls $PACKAGE/* | fzf`
+        ;;
+    "remove")
+        eslackpkg-remove $@
+        ;;
+    "all")
+        find $PACKAGE/*
+        ;;
+    "download")
+        eslackpkg-download
+        ;;
+    "build")
+        sudo $passing sh `ls *SlackBuild`
+        ;;
+    "install")
+        sudo installpkg ./*.t?z
+        ;;
+    "help")
+        help-this $0
+        ;;
+    *)
+        help-this $0
+        ;;
+esac
