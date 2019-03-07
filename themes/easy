@@ -2,6 +2,7 @@
 #
 #color: cyan magenta red lightgreen green black lightyellow
 #       white
+. $SIMPLE_CONFIG/lib/shml.sh
 
 function set_bg_color () {
     color_word="\[$(bgcolor $1)\]$color_word\[$(bgcolor end)\]"
@@ -16,10 +17,7 @@ color_word="$USER"
 set_fg_color yellow
 USER=$color_word
 
-DATE_FROM_FORMAT=`date "+%Y-%m-%d %k:%M %A"`
-color_word="$DATE_FROM_FORMAT"
-set_fg_color lightgreen
-DATE=$color_word
+DATE_FROM_FORMAT='date "+%Y-%m-%d %H:%M %A"'
 
 
 if [ -n "$DESK_NAME" ]; then
@@ -35,4 +33,4 @@ set_bg_color white
 set_fg_color black
 COLOR_PATH=$color_word
 
-export PS1="$USER : $DATE\n$SHOW_ENV[$COLOR_PATH] > "
+export PS1="$USER : $(fgcolor lightgreen)\$($DATE_FROM_FORMAT)$(fgcolor end)\n$SHOW_ENV[$COLOR_PATH] > "

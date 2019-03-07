@@ -40,3 +40,8 @@ let g:quickmenu_max_width = 300
 let g:vimwiki_list = [{
   \ 'template_path': '$HOME/vimwiki/templates',
   \ 'template_default': 'default'}]
+
+" choose backup dir for user
+set backupdir=~/.local/share/trash/vim/backup
+set directory=~/.local/share/trash/vim/swp
+set undodir=~/.local/share/trash/vim/undo

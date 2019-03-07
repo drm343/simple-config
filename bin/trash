@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+#. $SIMPLE_CONFIG/completion/trash-completion.sh
+
+TRASH=$HOME/.local/share/trash
+
+case $1 in
+    "vim-backup")
+        rm -r $TRASH/vim/{backup,swp,undo}/*
+        ;;
+    *)
+        echo $1
+        ;;
+esac
