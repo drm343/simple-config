@@ -12,21 +12,13 @@ export SIMPLE_CONFIG=$HOME/.config/simple-config
 # Load plugin for bash complete
 . $SIMPLE_CONFIG/submodules/desk/shell_plugins/bash/desk
 
-# Load lib for parameter
-. $SIMPLE_CONFIG/lib/dispatch.sh
-
 # Load fzf menu
 . $SIMPLE_CONFIG/lib/fzf-menu.sh
-
-# Load enhance command for tab completion
-. $SIMPLE_CONFIG/submodules/fzf-tab/bash/fzf-bash-completion.sh
 
 # Load enhance command
 . $SIMPLE_CONFIG/lib/enhance-command.sh
 
 # thanks for http://simple-configrcgenerator.com/
-. $SIMPLE_CONFIG/plugin/shml/shml.sh
-#. /home/erlin/Software/source/shml/shml.sh
 . $SIMPLE_CONFIG/themes/$THEME
 
 
