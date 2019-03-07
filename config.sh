@@ -41,3 +41,6 @@ export EDITOR=vim
 # set false to close welcome message
 # default: true
 export WELCOME=true
+
+# Use for install command for DISTRO
+export DISTRO=slackware
