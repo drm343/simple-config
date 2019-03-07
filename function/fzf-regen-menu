@@ -12,4 +12,5 @@ fzf-regen-menu () {
     do
         echo $item >> $SIMPLE_CONFIG/data/menu
     done
+    sort -o $SIMPLE_CONFIG/data/menu $SIMPLE_CONFIG/data/menu
 }
