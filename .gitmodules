@@ -4,6 +4,6 @@
 [submodule "submodules/fzf"]
 	path = submodules/fzf
 	url = https://github.com/junegunn/fzf.git
-[submodule "submodules/devicons-shell"]
-	path = submodules/devicons-shell
-	url = git@github.com:ryanoasis/devicons-shell.git
+[submodule "kv-bash"]
+	path = submodules/kv-bash
+	url = git@github.com:drm343/kv-bash.git
