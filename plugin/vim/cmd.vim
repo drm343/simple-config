@@ -1,9 +1,3 @@
-" use tagbar for C language
-nmap <F1> :TagbarToggle<CR>
-
-" open menu
-nnoremap <F2> :call UseFZFMenu('printf "MyTest\nMain_Menu"')<CR>
-
 " F5 extend key
 "
 " use BROWSER for html
@@ -106,11 +100,6 @@ let command = getline(line("."))
     exec command
 endfunction
 nnoremap <F5> :call RunVimCommand()<CR>
-
-
-function! MyTest()
-    echo "hello"
-endfunction
 
 
 function! Main_Menu()

@@ -56,15 +56,6 @@ call g:quickmenu#header("緩衝區管理器")
 call g:quickmenu#append('切換緩衝區', ':BufExplorer', '')
 call g:quickmenu#append('打開緩衝區', ':BufExplorerHorizontalSplit', '將緩衝區開到新視窗')
 
-" Tab 操作相關
-call g:Quickmenu_currentAdd("tab")
-call g:quickmenu#reset()
-call g:quickmenu#header("tabpage 選單")
-
-call g:quickmenu#append('新分頁', ':tabnew', '')
-call g:quickmenu#append('下一個分頁', ':tabnext', '')
-call g:quickmenu#append('上一個分頁', ':tabprevious', '')
-call g:quickmenu#append('關閉', ':tabclose', '')
 
 " 專案管理工具
 call g:Quickmenu_currentAdd("project")
