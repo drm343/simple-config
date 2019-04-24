@@ -6,7 +6,7 @@ function! Start()
   " normal winodw.
   setlocal
     \ bufhidden=wipe
-    \ buftype=nofile
+    \ buftype=nowrite
     \ nobuflisted
     \ nocursorcolumn
     \ nocursorline
@@ -16,7 +16,8 @@ function! Start()
     \ norelativenumber
 
   " Our message goes here. Mine is simple.
-  exec 'read' $VIM_CONFIG . '/screen.txt'
+  exec 'read' $SIMPLE_CONFIG . '/doc/startpage.wiki'
+  set filetype=vimwiki
   goto | delete
 
   " When we are done writing out message set the buffer to readonly.
@@ -27,11 +28,17 @@ function! Start()
   " Just like with the default start page, when we switch to insert mode
   " a new buffer should be opened which we can then later save.
   nnoremap <buffer><silent> e :enew<CR>
-  nnoremap <buffer><silent> i :enew <bar> startinsert<CR>
-  nnoremap <buffer><silent> t :edit $SIMPLE_CONFIG_DOC/vim-tutorial-zh_TW.txt<CR>
+  nnoremap <buffer><silent> t :call OpenTutorialDoc()<CR>
   nnoremap <buffer><silent> <leader>m :enew <bar> call g:quickmenu#toggle(0)<CR>
-
+  nnoremap <buffer><silent> q :q<CR>
 endfunction
+
+
+function! OpenTutorialDoc()
+  edit $SIMPLE_CONFIG/doc/vim-tutorial-zh_TW.wiki
+  set filetype=vimwiki
+endfunction
+
 
 if argc() == 0
   autocmd VimEnter * call Start()

@@ -1,0 +1,3 @@
+use [[vim:enew|e]] to open new file
+use [[vim:call OpenTutorialDoc()|t]] to open tutorial
+use [[vim:quit|q]] to quit this window
