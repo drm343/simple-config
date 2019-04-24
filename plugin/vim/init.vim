@@ -1,7 +1,5 @@
-" use vim-plug to install plugin
-call plug#begin("~/.vim/my-plug")
-source $VIM_CONFIG/load-plug.vim
-call plug#end()
+" setup runtime search path
+set packpath+=$SIMPLE_CONFIG/submodules
 
 " user config
 source $VIM_CONFIG/user.vim

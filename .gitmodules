@@ -2,8 +2,44 @@
 	path = submodules/desk
 	url = git@github.com:jamesob/desk.git
 [submodule "submodules/fzf"]
-	path = submodules/fzf
+	path = submodules/pack/fzf/start/fzf
 	url = https://github.com/junegunn/fzf.git
 [submodule "kv-bash"]
 	path = submodules/kv-bash
 	url = git@github.com:drm343/kv-bash.git
+[submodule "submodules/pack/base/start/vim-airline"]
+	path = submodules/pack/status-bar/start/vim-airline
+	url = git@github.com:vim-airline/vim-airline.git
+[submodule "submodules/pack/color/start/awesome-vim-colorschemes"]
+	path = submodules/pack/color/start/awesome-vim-colorschemes
+	url = git@github.com:rafi/awesome-vim-colorschemes.git
+[submodule "submodules/pack/lib/start/L9"]
+	path = submodules/pack/lib/start/L9
+	url = git@github.com:vim-scripts/L9.git
+[submodule "submodules/pack/lib/start/AutoComplPop"]
+	path = submodules/pack/lib/start/AutoComplPop
+	url = git@github.com:vim-scripts/AutoComplPop.git
+[submodule "submodules/pack/lib/opt/editorconfig"]
+	path = submodules/pack/lib/opt/editorconfig
+	url = git@github.com:editorconfig/editorconfig-vim
+[submodule "submodules/pack/c-lang/opt/tagbar"]
+	path = submodules/pack/c-lang/opt/tagbar
+	url = git@github.com:majutsushi/tagbar
+[submodule "submodules/pack/c-lang/opt/gen_tags"]
+	path = submodules/pack/c-lang/opt/gen_tags
+	url = git@github.com:jsfaint/gen_tags.vim
+[submodule "submodules/pack/base/opt/auto-pairs"]
+	path = submodules/pack/base/start/auto-pairs
+	url = git@github.com:jiangmiao/auto-pairs
+[submodule "submodules/pack/base/start/bufexplorer"]
+	path = submodules/pack/base/start/bufexplorer
+	url = git@github.com:jlanzarotta/bufexplorer
+[submodule "submodules/pack/wiki/start/vimwiki"]
+	path = submodules/pack/wiki/start/vimwiki
+	url = git@github.com:vimwiki/vimwiki
+[submodule "submodules/pack/fzf/start/fzf.vim"]
+	path = submodules/pack/fzf/start/fzf.vim
+	url = git@github.com:junegunn/fzf.vim
+[submodule "submodules/pack/ui/start/quickmenu.vim"]
+	path = submodules/pack/ui/start/quickmenu.vim
+	url = git@github.com:skywind3000/quickmenu.vim.git

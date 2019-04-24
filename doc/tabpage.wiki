@@ -1,0 +1,6 @@
+[[vim:call TabSwitchPreviousAndClose()|上一個分頁]]
+[[vim:call TabSwitchNextAndClose()|下一個分頁]]
+[[vim:call TabOpenNewAndClose()|新分頁]]
+[[vim:tabclose|關閉新分頁]]
+
+[[vim:close|關閉]]
