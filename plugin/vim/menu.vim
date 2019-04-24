@@ -28,6 +28,7 @@ call g:quickmenu#append('緩衝區管理', ':call Quickmenu_toggle("buffer")', '
 call g:quickmenu#append('檔案', ':call Quickmenu_toggle("file")', '本檔案的操作')
 call g:quickmenu#append('終端機', ':call OpenTerminal()', '打開終端機')
 call g:quickmenu#append('專案', ':call Quickmenu_toggle("project")', '用 session 的方式進行專案管理')
+call g:quickmenu#append('Wiki', ':call Quickmenu_toggle("wiki")', '打開 wiki<space>w')
 
 " 檔案
 call g:Quickmenu_currentAdd("file")
@@ -83,6 +84,16 @@ function! g:Project_config ()
 endfunction
 
 call g:quickmenu#append('設定', ':call Project_config()', '修改 Projectx.vim 調整專案設定')
-call g:quickmenu#append('引入設定', ':call AddIncludeSession()', '加入其他專案的設定')
 call g:quickmenu#append('儲存全部檔案', ':wa', '儲存全部修改過的檔案')
 call g:quickmenu#append('關閉全部檔案', ':qa', '關閉全部檔案，如果有修改過未儲存檔案，會無法關閉')
+
+
+" vimwiki 選單
+call g:Quickmenu_currentAdd('wiki')
+call g:quickmenu#reset()
+call g:quickmenu#header('vimwiki 選單')
+
+call g:quickmenu#append('打開 wiki', ':VimwikiIndex', '打開 vimwiki 主頁')
+call g:quickmenu#append('打開日記', ':VimwikiDiaryIndex', '打開日記主頁')
+call g:quickmenu#append('重建日記目錄', ':VimwikiDiaryGenerateLinks', '重新產生日記用的目錄')
+call g:quickmenu#append('Todo 完成/未完成', ':VimwikiToggleListItem', '標記  Todo 選單完成或未完成')

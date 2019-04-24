@@ -18,55 +18,104 @@ nnoremap + <C-w>_<C-w><Bar>
 
 " A good menu ui for user
 noremap <leader>m :call quickmenu#toggle(0)<cr>
-noremap <leader>t :call Quickmenu_toggle("tab")<cr>
 noremap <leader>l :call g:quickmenu#toggle(g:quickmenu_last_counter)<cr>
 
 " Tab complet
 inoremap <tab> <C-n>
+vnoremap <tab> zA<Esc>
+vnoremap <leader>f zf
+vnoremap <leader>d zd
+
+" set wiki menu
+autocmd FileType vimwiki
+  \ noremap <leader>w :call Quickmenu_toggle('wiki')<cr>
+
+" wiki resolve link handler
+function! s:cmd_resolve_link(link_text)
+    let link_text = a:link_text
+    let link_infos = {
+                \ 'index': -1,
+                \ 'scheme': '',
+                \ 'filename': '',
+                \ 'anchor': '',
+                \ }
+    if link_text =~# '^shell:'
+        let link_infos.scheme = 'shell'
+        let link_infos.filename = link_text[6:]
+        let link_infos.index = 1
+        return link_infos
+    elseif link_text =~# '^bash:'
+        let link_infos.scheme = 'run-bash'
+        let link_infos.filename = link_text[5:]
+        let link_infos.index = 1
+        return link_infos
+    elseif link_text =~# '^vim:'
+        let link_infos.scheme = 'vim'
+        let link_infos.filename = link_text[4:]
+        let link_infos.index = 1
+        return link_infos
+    else
+        return vimwiki#base#resolve_link(a:link_text)
+    endif
+endfunction
+
+" wiki remap link handler
+function! VimwikiLinkHandler(link)
+    let link = a:link
+
+    let link_infos = s:cmd_resolve_link(link)
+
+    if link_infos.filename == ''
+        echomsg 'Vimwiki Error: Unable to resolve link!'
+        return 0
+    elseif link_infos.scheme == 'file'
+        exec 'vsplit ' . fnameescape(link_infos.filename)
+        return 1
+    elseif link_infos.scheme == 'shell'
+        exec '!./' . fnameescape(link_infos.filename)
+        return 1
+    elseif link_infos.scheme == 'run-bash'
+        exec '!' . fnameescape(link_infos.filename)
+        return 1
+    elseif link_infos.scheme == 'vim'
+        echo link_infos.filename
+        exec link_infos.filename
+        return 1
+    endif
+endfunction
 
 
-fu! OpenTerminal()
+function! OpenTerminal()
     " open split windows on the topleft
     topleft split
     " resize the height of terminal windows to 30
     resize 30
     :call term_start('bash', {'curwin' : 1, 'term_finish' : 'close'})
-endf
+endfunction
 
-fu! ReadShellResultCommand()
+
+function! ReadShellResultCommand()
     let command = getline(line("."))
     exec "r!" command
-endf
+endfunction
 nnoremap <F4> :call ReadShellResultCommand()<CR>
 
 
-fu! RunVimCommand()
+function! RunVimCommand()
 let command = getline(line("."))
     exec command
-endf
+endfunction
 nnoremap <F5> :call RunVimCommand()<CR>
 
-fu! g:IncludeSession(plugin)
-    let SESSION_DIR = "$VIM_CONFIG/session/"
-    exec "source" SESSION_DIR . a:plugin
-endf
 
-
-fu! AddIncludeSession()
-    let bash_command='find "$VIM_CONFIG/session/" -name "*x\.vim" -printf "%f\n"'
-    let plugin_name=fzf#run({'source': bash_command, 'down': '50%'})
-    exec 'r!echo "IncludeSession(\"' . get(plugin_name, 0, "") . '\")" '
-endf
-
-
-fu! MyTest()
+function! MyTest()
     echo "hello"
-endf
+endfunction
 
 
-fu! Main_Menu()
+function! Main_Menu()
     call g:Quickmenu_toggle("main")
-endf
+endfunction
 
 
 fu! UseFZFMenu(fzf_menu)
