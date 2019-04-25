@@ -1,0 +1,17 @@
+= 前言 =
+
+本文件使用 vimwiki 撰寫，使用 enter 可以從連結跳轉到對應文件，backspace 可以跳
+回上一份文件。
+
+滑鼠在本設定中預設為啟動，可以直接用滑鼠點擊連結來移動游標位置，然後按下 Enter
+打開文件。
+
+當輸入位置移動到[[連結]]時，會自動展開連結並且顯示內容。
+
+
+= 目錄 =
+  1. Bash 與 terminal
+    a) [[#前言|前言]]
+    b) [[m-tutorial-zh_TW|教學]]
+    c) [[simple-config-zh_TW|歡迎使用 simple-config]]
+  2. [[vim-tutorial-zh_TW| not ide config 教學]]

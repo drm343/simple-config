@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+# Load test command enhance
+. $SIMPLE_CONFIG/function/private/is-1.1.0/is.sh
+
+load-function () {
+if is dir $1; then
+    for i in $1/*;
+    do
+        if is dir "$i"; then
+            . $i/*
+        else
+            . $i
+        fi
+    done
+else 
+    . $1
+fi
+}

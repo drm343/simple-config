@@ -1,0 +1,16 @@
+= 移動工作目錄 =
+
+[[vim:cd ~/|goto home]]
+[[vim:cd ~/.config/simple-config/|goto simple-config]]
+[[vim:cd ..|up dir]]
+[[vim:pwd|顯示目前工作區]]
+
+
+= 緩衝區 =
+
+[[vim:ls|show buffer]]
+
+
+= 打開檔案 =
+
+[[vim:call EnhanceReadls()|載入當前目錄檔案]]

@@ -3,7 +3,10 @@ Config for bash
 
 ## Required
 
-* stow
+* bash 5.0
+* readline 8.0
+* vim 8.0
+* git 2.21.0
 
 ## Install
 
@@ -11,11 +14,11 @@ Config for bash
 
 * git clone git@github.com:drm343/simple-config.git
 
-### 2. Run scripts/install.sh in simple-config
+### 2. Run plugin/install.sh in simple-config
 
 * cd .config/simple-config
 
-* bash ./scripts/install.sh
+* bash ./plugin/install.sh
 
 This will backup your origin .bashrc to .bashrc.bk, then source it in .bashrc.
 
@@ -27,4 +30,4 @@ Remove simple-config and mv .bashrc.bk to .bashrc
 
 Just type m and enter, you will see command menu.
 
-Bash use menu-complete, not complete. You can comment 'TAB:menu-complete' to use origin complete behavior in init.sh.
+Bash use menu-complete, not complete. You can comment 'TAB:menu-complete' to use origin complete behavior in config.sh.

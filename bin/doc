@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+vim -M $SIMPLE_CONFIG/doc/m-tutorial-zh_TW.wiki

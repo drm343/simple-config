@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+cd-home () {
+    cd "$(find "$HOME" -type d -path "$HOME/.local/share/lxc" -prune -o -print | fzf)"
+}

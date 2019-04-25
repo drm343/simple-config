@@ -1,0 +1,23 @@
+= 目錄 =
+  - [[#前言|前言]]
+  - [[#結尾|結尾]]
+
+
+== 前言 ==
+
+歡迎使用 simple config 這個設定檔。
+
+想學習如何使用請輸入 m 指令啟動 fzf-menu，然後執行 tutorial。
+
+關閉歡迎訊息請在 [[file:../config.sh|config]] 中將 WELCOME 設定成 false。
+
+可以使用 m 指令啟動 fzf-menu 後執行 setting-config，再執行 reload-menu 即可。
+
+
+== 結尾 ==
+
+只要會 m 這個指令，就已經學會這個設定檔的基本操作了。
+
+這個設定檔跟 vim 相同，使用 "mode" 的方式來管理 m 這個指令跟操作。
+
+請回到[[index-zh_TW|首頁]]來獲得進一步資訊。

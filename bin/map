@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+local_command=$1
+shift
+echo -n $@ | xargs -d ' ' --max-procs=0 -n 1 -I ITEM $local_command ITEM

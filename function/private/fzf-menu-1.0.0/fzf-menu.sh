@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-fzf-menu2 () {
+fzf-menu () {
     local command=`cat \
         $SIMPLE_CONFIG/data/menu \
         | fzf`

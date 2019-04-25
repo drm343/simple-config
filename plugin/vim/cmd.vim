@@ -33,8 +33,8 @@ function! s:cmd_resolve_link(link_text)
                 \ 'filename': '',
                 \ 'anchor': '',
                 \ }
-    if link_text =~# '^shell:'
-        let link_infos.scheme = 'shell'
+    if link_text =~# '^script:'
+        let link_infos.scheme = 'shell-script'
         let link_infos.filename = link_text[6:]
         let link_infos.index = 1
         return link_infos
@@ -65,14 +65,13 @@ function! VimwikiLinkHandler(link)
     elseif link_infos.scheme == 'file'
         exec 'vsplit ' . fnameescape(link_infos.filename)
         return 1
-    elseif link_infos.scheme == 'shell'
+    elseif link_infos.scheme == 'shell-script'
         exec '!./' . fnameescape(link_infos.filename)
         return 1
     elseif link_infos.scheme == 'run-bash'
         exec '!' . fnameescape(link_infos.filename)
         return 1
     elseif link_infos.scheme == 'vim'
-        echo link_infos.filename
         exec link_infos.filename
         return 1
     endif
@@ -107,7 +106,7 @@ function! Main_Menu()
 endfunction
 
 
-fu! UseFZFMenu(fzf_menu)
+function! UseFZFMenu(fzf_menu)
     let my_command=fzf#run({'source': a:fzf_menu, 'down': '50%'})
     let my_command=get(my_command, 0, "")
     if my_command =~ "^$"
@@ -115,4 +114,53 @@ fu! UseFZFMenu(fzf_menu)
     else
         exec ":call" my_command . "()"
     endif
-endf
+endfunction
+
+
+function! EditFile()
+    let my_file_list=fzf#run({'down': '50%'})
+    let my_file=get(my_file_list, 0, "")
+    if my_file =~ "^$"
+        echo my_file_list
+        echo my_file
+        "echo "nothing"
+    else
+        exec ":open" my_file
+    endif
+endfunction
+
+
+function! SplitEditFile()
+    let my_file_list=fzf#run({'down': '50%'})
+    let my_file=get(my_file_list, 0, "")
+    if my_file =~ "^$"
+        echo "nothing"
+    else
+        exec ":split" my_file
+    endif
+endfunction
+
+
+function! EnhanceReadls()
+    new
+
+    " Set some options for this buffer to make sure that does not act like a
+    " normal winodw.
+    setlocal
+                \ bufhidden=delete
+                \ buftype=nowrite
+                \ nobuflisted
+                \ nocursorcolumn
+                \ nocursorline
+                \ nolist
+                \ nonumber
+                \ noswapfile
+
+    exec 'r!map vim-extend *'
+    set filetype=vimwiki
+    goto | delete
+
+
+    " command for list result
+    nnoremap <buffer><silent> q :close<CR>
+endfunction

@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-load-complete () {
+load-completion () {
     for i in $SIMPLE_CONFIG/completion/*;
     do
         . $i;

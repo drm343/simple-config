@@ -1,4 +1,5 @@
-alias ls="ls --color"
-alias fzf="fzf --ansi"
-alias editor="vim"
-alias m='fzf-menu2'
+alias ls='ls --color'
+alias fzf='fzf --ansi'
+alias editor='vim'
+alias m='fzf-menu'
+alias ..='ecd-up'

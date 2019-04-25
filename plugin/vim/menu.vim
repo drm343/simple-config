@@ -1,3 +1,6 @@
+" Force load plugin, avoid loading problem.
+packadd quickmenu.vim
+
 function! g:Quickmenu_currentAdd(var)
     let g:quickmenu_counter = g:quickmenu_counter + 1
     let g:quickmenu_var[a:var] = g:quickmenu_counter
@@ -45,8 +48,8 @@ call g:Quickmenu_currentAdd("open old file")
 call g:quickmenu#reset()
 call g:quickmenu#header("打開舊檔")
 
-call g:quickmenu#append('取代', ':EditVifm', '直接打開檔案')
-call g:quickmenu#append('在新視窗打開', ':SplitVifm', '在新視窗打開檔案')
+call g:quickmenu#append('取代', ':call EditFile()', '直接打開檔案')
+call g:quickmenu#append('在新視窗打開', ':call SplitEditFile()', '在新視窗打開檔案')
 
 " 緩衝區管理器
 call g:Quickmenu_currentAdd("buffer")

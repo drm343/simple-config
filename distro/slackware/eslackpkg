@@ -7,6 +7,7 @@ echo "find: search package"
 echo "check: search and read content from a package"
 echo "remove: remove select package"
 echo "all: pass all installed packages as parameter for other command"
+echo "requires: setup sbo require source packages"
 echo "download: download sbo source package"
 echo "build: build sbo package"
 echo "install: install sbo package"
@@ -53,6 +54,16 @@ curl -L $file_url --output $file_name
 }
 
 
+eslackpkg-set-requires () {
+local require_packages=`egrep -i "Requires" ./*.info | sed "s/REQUIRES=\"\(.*\)\"/\1/"`
+for package in $require_packages;
+do
+    command pushd `find ../.. -name "$package"` > /dev/null
+    eslackpkg-set-requires
+done
+}
+
+
 passing=""
 for i in $@;
 do
@@ -75,6 +86,10 @@ case $1 in
         ;;
     "all")
         find $PACKAGE/*
+        ;;
+    "requires")
+        eslackpkg-set-requires
+        dirs -v
         ;;
     "download")
         eslackpkg-download

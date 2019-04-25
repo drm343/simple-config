@@ -1,0 +1,204 @@
+#!/usr/bin/env bash
+# ABOUT kv-bash: 
+#    key/value dabatase
+#    default database store in HOME directory
+#    can change database by setup KV_DB_DIR
+#
+# Author: drm343
+# Version: 0.2.0
+# Requirements: unix-like environement, no dependencies
+#
+# Author: damphat
+# Version: 0.1.0
+# Requirements: unix-like environement, no dependencies
+#
+# USAGE:
+#    kv-bash set <key> <value>     # assign value to key
+#    kv-bash get <key>             # get value of key
+#    kv-bash del <key>             # delete by key
+#    kv-bash keys                  # list all current keys
+#    kv-bash show                  # list all current key/value pairs
+#    kv-bash clear                 # clear database
+#
+# EXAMPLES: 
+#    $ kv-bash set user mr.bob
+#    $ kv-bash set pass abc@123
+#    $ kv-bash show
+#      user mr.bob
+#      pass abc@123
+#    $ kv-bash get user
+#      mr.bob
+#    $ kv-bash get pass
+#      abc@123
+#    $ kv-bash del pass
+#    $ kv-bash get pass
+#
+#    $ kv-bash clear
+
+########################
+# CONSTANTS
+########################
+
+kv-bash () {
+    # Default DB path
+    KV_DB_DIR="${KV_DB_DIR:-$HOME/.kv-bash}"
+
+    ########################
+    # DB PATH FUNCTIONS
+    ########################
+    # Show DB path
+    db-path () {
+        echo $KV_DB_DIR
+    }
+
+    # Call: set-db-path <path>
+    # Usage: kv-bash set-path <path>
+    set-db-path () {
+        export KV_DB_DIR=$1
+    }
+
+    ########################
+    # LOCAL FUNCTIONS
+    ########################
+
+    # print to stderr, red color
+    echo_err() {
+        echo -e "\e[01;31m$@\e[0m" >&2
+    }
+
+    # Call: echo_err_function <err-msg> <function-name>
+    echo_err_function() {
+        echo_err "ERROR: $1" 
+        echo_err "function: $2"
+    }
+
+    # Call: validate_key <key>
+    validate_key() {
+        [[ "$1" =~ ^[0-9a-zA-Z._:-]+$  ]]
+    }
+
+    ########################
+    # PUBLIC FUNCTIONS
+    ########################
+
+    # Call: get <key>
+    # Usage: kv-bash get <key>
+    get() {
+        key="$1"
+        validate_key "$key" || {
+            echo_err_function 'invalid param "key"' 'get()'
+            return 1
+        }
+        VALUE="$([ -f "$KV_DB_DIR/$key" ] && cat "$KV_DB_DIR/$key")"
+        echo "$VALUE"
+	
+        [ "$VALUE" != "" ]
+    }
+
+    # Call: set-value <key> [value]
+    # Usage: kv-bash set <key> [value] 
+    set-value() {
+        key="$1"
+        value="$2"
+        validate_key "$key" || {
+            echo_err_function 'invalid param "key"' 'set-value()'
+            return 1
+        }
+        test -d "$KV_DB_DIR" || mkdir "$KV_DB_DIR"
+        echo "$value" > "$KV_DB_DIR/$key"
+    }
+
+    # Remove unused key
+    # Call: remove <key>
+    # Usage: kv-bash del <key>
+    remove() {
+        key="$1"
+        validate_key "$key" || {
+            echo_err_function 'invalid param "key"' 'remove()'
+            return 1
+        }
+        test -f "$KV_DB_DIR/$key" && rm -f "$KV_DB_DIR/$key"
+    }
+
+    # list all key pairs to stdout
+    # Call: list-keys
+    # Usage: kv-bash keys
+    list-keys() {
+        for i in "$KV_DB_DIR/"*; do
+            if [ -f "$i" ]; then
+                key="$(basename "$i")"
+                echo "$key"
+            fi
+        done 
+    }
+
+    # list all key/value pairs to stdout
+    # Usage: kv-bash list-all
+    list-all() {
+        for i in "$KV_DB_DIR/"*; do
+            if [ -f "$i" ]; then
+                key="$(basename "$i")"
+                echo "$key" "$(get "$key")"
+            fi
+        done 
+    }
+
+    # clear all key/value pairs in database
+    # Usage: kv-bash clear
+    clear () {
+        rm -rf "$KV_DB_DIR"
+    }
+
+
+    # show Usage
+    # Usage: kv-bash help
+    help-this() {
+    echo "\
+ USAGE:
+    kv-bash set <key> <value>     # assign value to key
+    kv-bash get <key>             # get value of key
+    kv-bash del <key>             # delete by key
+    kv-bash keys                  # list all current keys
+    kv-bash show                  # list all current key/value pairs
+    kv-bash clear                 # clear database"
+    }
+
+
+   case $1 in
+       "get")
+           shift
+           get $@
+           ;;
+       "set")
+           shift
+           set-value $@
+           ;;
+       "remove")
+           shift
+           remove $@
+           ;;
+       "keys")
+           shift
+           list-keys
+           ;;
+       "clear")
+           shift
+           clear
+           ;;
+       "show")
+           shift
+           list-all
+           ;;
+       "path")
+           shift
+           db-path
+           ;;
+       "set-path")
+           shift
+           set-db-path $@
+           ;;
+       *)
+           help-this
+           ;;
+   esac
+}

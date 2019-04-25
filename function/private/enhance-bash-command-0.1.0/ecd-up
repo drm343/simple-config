@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+ecd-up () {
+    if is not empty $1; then
+        if is gt $1 1;then
+            for i in $(seq 1 $1);
+            do
+                cd ..
+            done
+        fi
+    else
+        cd ..
+    fi
+}

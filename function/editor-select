@@ -1,4 +1,0 @@
-#!/usr/bin/env bash
-editor-select () {
-    editor -S `find $VIM_CONFIG/session/* | sed "/.*\x.vim/d" | fzf`
-}

@@ -25,6 +25,9 @@ autocmd BufWinEnter *.* silent loadview
 set encoding=UTF-8
 set fileencodings=utf8,latin1
 
+" use bashrc for gvim
+set shellcmdflag=-c
+
 " show line number and user can type relativenumber and jump to target line
 set number
 set relativenumber

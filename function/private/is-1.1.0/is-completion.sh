@@ -1,8 +1,10 @@
 #!/usr/bin/env bash
-_eslack_completions ()
+_is_completions ()
 {
-    local commands="find check remove requires download build install all help"
-    local subcommands_remove="current select"
+    local base_commands="equal matching substring empty number gt \
+          lt ge le file dir link existing readable writeable executable \
+          available older newer true false"
+    local commands="$base_commands not"
 
     local cur prev
 
@@ -15,8 +17,8 @@ _eslack_completions ()
             ;;
         2)
             case ${prev} in
-                remove)
-                    COMPREPLY=($(compgen -W "$subcommands_remove" -- ${cur}))
+                not)
+                    COMPREPLY=($(compgen -W "$base_commands" -- ${cur}))
                     ;;
             esac
             ;;
@@ -24,7 +26,6 @@ _eslack_completions ()
             COMPREPLY=()
             ;;
     esac
-
 }
 
-complete -F _eslack_completions eslackpkg
+complete -F _is_completions is

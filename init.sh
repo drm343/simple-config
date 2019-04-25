@@ -9,49 +9,31 @@ export SIMPLE_CONFIG=$HOME/.config/simple-config
 # Load plugin for bash complete
 . $SIMPLE_CONFIG/submodules/desk/shell_plugins/bash/desk
 
-# Load fzf menu
-. $SIMPLE_CONFIG/lib/fzf-menu-2.sh
-
 # Load enhance command
-for i in $SIMPLE_CONFIG/function/*;
+. $SIMPLE_CONFIG/function/private/load-function-0.1.0/load-function 
+
+for i in $SIMPLE_CONFIG/function/{private,public}/*;
 do
-    . $i
+    load-function $i
 done
 
 # thanks for http://simple-configrcgenerator.com/
 . $SIMPLE_CONFIG/themes/$THEME
 
 
-# if the command-not-found package is installed, use it
-if [ -x /usr/lib/command-not-found -o -x /usr/share/command-not-found/command-not-found ]; then
-  function command_not_found_handle {
-    # check because c-n-f could've been removed in the meantime
-    if [ -x /usr/lib/command-not-found ]; then
-      /usr/lib/command-not-found -- "$1"
-      return $?
-    elif [ -x /usr/share/command-not-found/command-not-found ]; then
-      /usr/share/command-not-found/command-not-found -- "$1"
-      return $?
-    else
-      printf "%s: command not found\n" "$1" >&2
-      return 127
-    fi
-  }
-fi
-
 # enable bash completion in interactive shells
-if ! shopt -oq posix; then
-  if [ -f /usr/share/bash-completion/bash_completion ]; then
+if is not $(shopt -oq posix); then
+  if is existing /usr/share/bash-completion/bash_completion; then
     . /usr/share/bash-completion/bash_completion
-  elif [ -f /etc/bash_completion ]; then
+  elif is existing /etc/bash_completion; then
     . /etc/bash_completion
   fi
 fi
-load-complete
+load-completion
 
 # welcome message
-if $WELCOME; then
-    if [ -z "$DESK_NAME" ]; then
-        desk run tutorial-mode tutorial-main-0
-    fi
+if is true $WELCOME; then
+    echo "歡迎使用本設定檔，教學文件請參考 doc/index-zh_TW.wiki，或是執行 doc 指令也可以。
+
+關閉本訊息請在 config.sh 中將 WELCOME 變數設為 false，也可以執行 setting-config"
 fi

@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 fzf-regen-menu () {
     result=`ls \
-        $SIMPLE_CONFIG/function/* \
+        $SIMPLE_CONFIG/function/public/* \
         $SIMPLE_CONFIG/desks/* \
         | sed "s/.*desks\/\(.*\)\.sh/\1/" \
-        | sed "s/.*function\/\(.*\)/\1/" `
+        | sed "s/.*function\/public\/\(.*\)/\1/" `
 
     rm $SIMPLE_CONFIG/data/menu
 
