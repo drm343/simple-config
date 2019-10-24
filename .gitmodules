@@ -4,9 +4,6 @@
 [submodule "submodules/fzf"]
 	path = submodules/pack/fzf/start/fzf
 	url = https://github.com/junegunn/fzf.git
-[submodule "kv-bash"]
-	path = submodules/kv-bash
-	url = git@github.com:drm343/kv-bash.git
 [submodule "submodules/pack/base/start/vim-airline"]
 	path = submodules/pack/status-bar/start/vim-airline
 	url = git@github.com:vim-airline/vim-airline.git
@@ -43,3 +40,6 @@
 [submodule "submodules/pack/ui/start/quickmenu.vim"]
 	path = submodules/pack/ui/start/quickmenu.vim
 	url = git@github.com:skywind3000/quickmenu.vim.git
+[submodule "submodules/pack/lsb/start/ale"]
+	path = submodules/pack/lsb/start/ale
+	url = https://github.com/w0rp/ale.git
