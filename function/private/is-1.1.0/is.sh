@@ -45,7 +45,7 @@ EOF
     fi
 
     if [ "$1" == "--version" ]; then
-        echo "is.sh 1.1.0"
+        echo "is.sh 1.1.1"
         return 0
     fi
 
@@ -86,6 +86,8 @@ EOF
             [ -z "$value_a" ]; return $?;;
         number)
             echo "$value_a" | grep -E '^[0-9]+(\.[0-9]+)?$'; return $?;;
+        version)
+            echo "$value_a" | grep -E '^[0-9]+\.[0-9]+\.[0-9]+$'; return $?;;
         older)
             [ "$value_a" -ot "$value_b" ]; return $?;;
         newer)

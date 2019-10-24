@@ -17,7 +17,7 @@
 	path = submodules/pack/lib/start/AutoComplPop
 	url = git@github.com:vim-scripts/AutoComplPop.git
 [submodule "submodules/pack/lib/opt/editorconfig"]
-	path = submodules/pack/lib/opt/editorconfig
+	path = submodules/pack/lib/start/editorconfig
 	url = git@github.com:editorconfig/editorconfig-vim
 [submodule "submodules/pack/c-lang/opt/tagbar"]
 	path = submodules/pack/c-lang/opt/tagbar

@@ -11,6 +11,7 @@ echo "requires: setup sbo require source packages"
 echo "download: download sbo source package"
 echo "build: build sbo package"
 echo "install: install sbo package"
+echo "version: check sbo package version"
 }
 
 eslackpkg-remove () {
@@ -51,6 +52,59 @@ eslackpkg-download () {
 local file_url=`cat ./*.info | fzf | sed "s/^.*=//" | tr -d "\""`
 local file_name=`basename $file_url`
 curl -L $file_url --output $file_name
+}
+
+
+eslackpkg-version () {
+    shift
+
+    case $1 in
+        "current")
+            local PACKAGE=`find . -name "*_SBo.t?z"`
+            ;;
+        "select")
+            local FULL_PATH=$(find /var/log/packages/ -name '*SBo' | fzf)
+            local PACKAGE=$(basename $FULL_PATH)
+            ;;
+        *)
+            echo "current: check current package version in this directory"
+            echo "select: select package and check version"
+            return 1
+            ;;
+    esac
+
+    IFS="-" command eval 'LINE=($(echo $PACKAGE))'
+    for i in ${LINE[@]};
+    do
+        if is version $i;
+        then
+            VERSION="$i"
+            break
+        else
+            if is empty $PACKAGE_NAME;
+            then
+                PACKAGE_NAME="$i"
+            else
+                PACKAGE_NAME="$PACKAGE_NAME-$i"
+            fi
+        fi
+    done
+
+    echo $PACKAGE_NAME
+    case $1 in
+        "current")
+            local info_path="./*.info"
+            ;;
+        "select")
+            local info_path="`find /opt/Program/ -name $PACKAGE_NAME`/*.info"
+            ;;
+    esac
+
+    local package_version=`egrep -i "VERSION" $info_path \
+        | sed "s/VERSION=\"\(.*\)\"/\1/"`
+
+    echo $VERSION
+    echo $package_version
 }
 
 
@@ -95,13 +149,19 @@ case $1 in
         eslackpkg-download
         ;;
     "build")
-        sudo $passing sh `ls *SlackBuild`
+        USER=`whoami`
+        OUTPUT=$HOME/Software/queue/$(basename `pwd`)
+        sudo $passing TMP=$OUTPUT/SBo OUTPUT=$OUTPUT sh `ls *SlackBuild`
+        sudo chown $USER:users $OUTPUT
         ;;
     "install")
-        sudo installpkg ./*.t?z
+        sudo upgradepkg --install-new ./*.t?z
         ;;
     "help")
         help-this $0
+        ;;
+    "version")
+        eslackpkg-version $@
         ;;
     *)
         help-this $0
