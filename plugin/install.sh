@@ -38,3 +38,6 @@ if is existing $HOME/.vimrc; then
     cp $HOME/.vimrc $HOME/.vimrc.bk
 fi
 ln -s $DOTFILES_CONFIG/.vimrc .
+
+echo "create dirs for vim"
+mkdir -p ~/.local/share/trash/vim/{backup,swp,undo}

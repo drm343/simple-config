@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+erm () {
+    run_erm () {
+        echo -ne `pwd`
+        result="`ls -al | sed 1d | fzf -m --header 'Press esc, or select . to exit program'\
+            | awk '{print $NF}'`"
+        if [ "$result" = "." ]; then
+            echo "can't remove ."
+        elif [ "$result" = ".." ]; then
+            echo "not select"
+        elif [ -z "$result" ]; then
+            echo "can't remove ."
+        else
+            result="`echo -n $result`"
+            echo "rm $result"
+            rm $result
+        fi
+    }
+
+    if [ ! -z "$1" ]; then
+        rm $1
+    else
+        run_erm
+    fi
+}

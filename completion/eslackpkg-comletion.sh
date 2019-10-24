@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 _eslack_completions ()
 {
-    local commands="find check remove requires download build install all help"
-    local subcommands_remove="current select"
+    local commands="find check remove requires download build install all help version"
+    local subcommands_select="current select"
 
     local cur prev
 
@@ -16,7 +16,10 @@ _eslack_completions ()
         2)
             case ${prev} in
                 remove)
-                    COMPREPLY=($(compgen -W "$subcommands_remove" -- ${cur}))
+                    COMPREPLY=($(compgen -W "$subcommands_select" -- ${cur}))
+                    ;;
+                version)
+                    COMPREPLY=($(compgen -W "$subcommands_select" -- ${cur}))
                     ;;
             esac
             ;;
