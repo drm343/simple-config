@@ -70,3 +70,7 @@ let g:vimwiki_map_prefix = '<F13>'
 set backupdir=~/.local/share/trash/vim/backup
 set directory=~/.local/share/trash/vim/swp
 set undodir=~/.local/share/trash/vim/undo
+
+" sound: default typewriter mario sword bubble
+let g:keysound_enable = 0
+let g:keysound_theme = 'typewriter'
