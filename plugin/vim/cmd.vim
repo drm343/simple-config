@@ -43,6 +43,11 @@ function! s:cmd_resolve_link(link_text)
         let link_infos.filename = link_text[5:]
         let link_infos.index = 1
         return link_infos
+    elseif link_text =~# '^dir:'
+        let link_infos.scheme = 'dir'
+        let link_infos.filename = link_text[4:]
+        let link_infos.index = 1
+        return link_infos
     elseif link_text =~# '^vim:'
         let link_infos.scheme = 'vim'
         let link_infos.filename = link_text[4:]
@@ -70,6 +75,11 @@ function! VimwikiLinkHandler(link)
         return 1
     elseif link_infos.scheme == 'run-bash'
         exec '!' . fnameescape(link_infos.filename)
+        return 1
+    elseif link_infos.scheme == 'dir'
+        exec 'cd ' . fnameescape(link_infos.filename)
+        close
+        call EnhanceReadls()
         return 1
     elseif link_infos.scheme == 'vim'
         exec link_infos.filename
@@ -156,6 +166,7 @@ function! EnhanceReadls()
                 \ nonumber
                 \ noswapfile
 
+    put = '[[dir:..]]'
     exec 'r!map vim-extend *'
     set filetype=vimwiki
     goto | delete
