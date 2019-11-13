@@ -46,3 +46,6 @@
 [submodule "submodules/pack/base/start/vim-keysound"]
 	path = submodules/pack/base/start/vim-keysound
 	url = git@github.com:skywind3000/vim-keysound.git
+[submodule "submodules/stowsh"]
+	path = submodules/stowsh
+	url = github:drm343/simple-config.git
