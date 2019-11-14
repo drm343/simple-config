@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+#
+#color: cyan magenta red lightgreen green black lightyellow
+#       white
+. $SIMPLE_CONFIG/function/lib/shml-1.1.0/shml.sh
+
+function set_bg_color () {
+    color_word="\[$(bgcolor $1)\]$color_word\[$(bgcolor end)\]"
+}
+
+function set_fg_color () {
+    color_word="\[$(fgcolor $1)\]$color_word\[$(fgcolor end)\]"
+}
+
+
+color_word="$USER"
+set_fg_color yellow
+FORMATED_USER=$color_word
+
+DATE_FROM_FORMAT='date "+%Y-%m-%d %H:%M %A"'
+
+
+if [ -n "$DESK_NAME" ]; then
+    color_word=$DESK_NAME
+    set_bg_color green
+    set_fg_color black
+    PROMPT_DESK_NAME=$color_word
+    SHOW_ENV="[env:$PROMPT_DESK_NAME]-"
+fi
+
+color_word="\w"
+set_bg_color white
+set_fg_color black
+COLOR_PATH=$color_word
+
+export PS1="$FORMATED_USER : $(fgcolor lightgreen)\$($DATE_FROM_FORMAT)$(fgcolor end)\n[$COLOR_PATH]\n$SHOW_ENV> "
