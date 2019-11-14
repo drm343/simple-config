@@ -4,7 +4,7 @@ endfunction
 
 
 function! TabSwitchNextAndClose()
-    close | tabNext
+    close | tabnext
 endfunction
 
 
