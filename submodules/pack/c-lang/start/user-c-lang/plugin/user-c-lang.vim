@@ -2,11 +2,7 @@ function! C_loading()
 " use tagbar for C language
 nmap <F1> :TagbarToggle<CR>
 
-if executable('gmake')
-    nmap <F5> :w<CR>:gmake<CR><CR><CR>
-elseif executable('make')
-    nmap <F5> :w<CR>:make<CR><CR><CR>
-endif
+nmap <F5> :w<CR>:make<CR><CR><CR>
 
 set dictionary+=$VIM_CONFIG/programming-language/c.txt
 

@@ -40,6 +40,13 @@ function! OpenTutorialDoc()
 endfunction
 
 
+function! GDBStart()
+    packadd termdebug
+endfunction
+
+
 if argc() == 0
     autocmd VimEnter * call Start()
+elseif and(argc() == 1, argv(0) == "gdb")
+    autocmd VimEnter * call GDBStart()
 endif
