@@ -8,22 +8,22 @@ noremap <leader>t :emenu 分頁.<C-Z>
 
 
 " add config
-nmenu 10.500 設定檔.儲存 :w<CR>
-nmenu 10.501 設定檔.儲存並關閉 :wq<CR>
 nmenu 10.502 設定檔.重載 :source %<CR>
 nmenu 10.510 設定檔.Grep.原始設定 :call Grep_Reset()<CR>
 nmenu 10.511 設定檔.Grep.Git      :call Grep_Git()<CR>
-nmenu 10.550 設定檔.關閉 :q<CR>
 
 
 " add old file
-nmenu <silent> 20.500 舊檔案.取代視窗 :call EditFile()<CR>
-nmenu <silent> 20.501 舊檔案.開新視窗 :call SplitEditFile()<CR>
+nmenu 20.500 檔案.儲存 :w<CR>
+nmenu <silent> 20.510 檔案.開啟舊檔.取代視窗 :call EditFile()<CR>
+nmenu <silent> 20.511 檔案.開啟舊檔.開新視窗 :call SplitEditFile()<CR>
+nmenu 20.550 檔案.儲存並關閉 :wq<CR>
+nmenu 20.551 檔案.關閉 :q<CR>
 
 
 " add buffer manager
-nmenu <silent> 30.500 緩衝區.取代視窗 :BufExplorer<CR>
-nmenu <silent> 30.501 緩衝區.開新視窗 :BufExplorerHorizontalSplit<CR>
+nmenu <silent> 30.500 緩衝區.取代視窗 :buffer <C-Z>
+nmenu <silent> 30.501 緩衝區.開新視窗 :sbuffer <C-Z>
 
 
 " quickfix 選單

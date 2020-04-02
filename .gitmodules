@@ -28,9 +28,6 @@
 [submodule "submodules/pack/base/opt/auto-pairs"]
 	path = submodules/pack/base/start/auto-pairs
 	url = git@github.com:jiangmiao/auto-pairs
-[submodule "submodules/pack/base/start/bufexplorer"]
-	path = submodules/pack/base/start/bufexplorer
-	url = git@github.com:jlanzarotta/bufexplorer
 [submodule "submodules/pack/wiki/start/vimwiki"]
 	path = submodules/pack/wiki/start/vimwiki
 	url = git@github.com:vimwiki/vimwiki

@@ -8,22 +8,22 @@ noremap <leader>t :emenu Tab.<C-Z>
 
 
 " add config
-nmenu 10.500 Config.Save :w<CR>
-nmenu 10.501 Config.Save\ And\ Close :wq<CR>
 nmenu 10.502 Config.Reload :source %<CR>
 nmenu 10.510 Config.Grep.Origin :call Grep_Reset()<CR>
 nmenu 10.511 Config.Grep.Git :call Grep_Git()<CR>
-nmenu 10.550 Config.Quit :q<CR>
 
 
 " add old file
-nmenu <silent> 20.500 Old\ File.Replace :call EditFile()<CR>
-nmenu <silent> 20.501 Old\ File.Split :call SplitEditFile()<CR>
+nmenu 20.500 File.Save :w<CR>
+nmenu 20.501 File.Save\ And\ Close :wq<CR>
+nmenu <silent> 20.510 File.Open\ File.Replace :call EditFile()<CR>
+nmenu <silent> 20.511 File.Open\ File.Split :call SplitEditFile()<CR>
+nmenu 20.550 File.Quit :q<CR>
 
 
 " add buffer manager
-nmenu <silent> 30.500 Buffer.Replace :BufExplorer<CR>
-nmenu <silent> 30.501 Buffer.Split :BufExplorerHorizontalSplit<CR>
+nmenu <silent> 30.500 Buffer.Replace :buffer <C-Z>
+nmenu <silent> 30.501 Buffer.Split :sbuffer <C-Z>
 
 
 " quickfix 選單
