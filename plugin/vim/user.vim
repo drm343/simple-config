@@ -43,11 +43,8 @@ colorscheme deep-space
 
 " setup colorscheme, need to install syntax check plugin
 syntax enable
+filetype plugin on
 filetype plugin indent on
-
-" quickmenu_options
-let g:quickmenu_options = "HL"
-let g:quickmenu_max_width = 300
 
 
 " vimwiki custom
@@ -55,12 +52,14 @@ let g:vimwiki_list = [{
   \ 'template_path': '$HOME/vimwiki/templates',
   \ 'template_default': 'default'}]
 
+
 let g:vimwiki_diary_months = {
       \ 1: '01', 2: '02', 3: '03',
       \ 4: '04', 5: '05', 6: '06',
       \ 7: '07', 8: '08', 9: '09',
       \ 10: '10', 11: '11', 12: '12'
       \ }
+
 
 " disable default vimwiki leader keymap for speed up open vimwiki menu
 let g:vimwiki_map_prefix = '<F13>'
@@ -71,6 +70,18 @@ set backupdir=~/.local/share/trash/vim/backup
 set directory=~/.local/share/trash/vim/swp
 set undodir=~/.local/share/trash/vim/undo
 
-" sound: default typewriter mario sword bubble
-let g:keysound_enable = 0
-let g:keysound_theme = 'typewriter'
+" For autocomplete file and vim menu
+set path+=**
+set wildmenu
+set cpo-=<
+set wcm=<C-Z>
+set guioptions+=M
+
+
+augroup VIMRC
+  autocmd!
+
+  autocmd BufLeave *.c   normal! mC
+  autocmd BufLeave *.h   normal! mH
+  autocmd BufLeave *.vim normal! mV
+augroup END

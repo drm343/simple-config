@@ -37,6 +37,3 @@
 [submodule "submodules/pack/fzf/start/fzf.vim"]
 	path = submodules/pack/fzf/start/fzf.vim
 	url = git@github.com:junegunn/fzf.vim
-[submodule "submodules/pack/ui/start/quickmenu.vim"]
-	path = submodules/pack/ui/start/quickmenu.vim
-	url = git@github.com:skywind3000/quickmenu.vim.git

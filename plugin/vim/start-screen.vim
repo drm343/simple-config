@@ -29,7 +29,7 @@ function! Start()
     " a new buffer should be opened which we can then later save.
     nnoremap <buffer><silent> e :enew<CR>
     nnoremap <buffer><silent> t :call OpenTutorialDoc()<CR>
-    nnoremap <buffer><silent> <leader>m :enew <bar> call g:quickmenu#toggle(0)<CR>
+    nnoremap <buffer><silent> <leader>m :emenu <C-Z>
     nnoremap <buffer><silent> q :q<CR>
 endfunction
 
