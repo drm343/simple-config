@@ -4,9 +4,6 @@
 [submodule "submodules/fzf"]
 	path = submodules/pack/fzf/start/fzf
 	url = https://github.com/junegunn/fzf.git
-[submodule "submodules/pack/base/start/vim-airline"]
-	path = submodules/pack/status-bar/start/vim-airline
-	url = git@github.com:vim-airline/vim-airline.git
 [submodule "submodules/pack/color/start/awesome-vim-colorschemes"]
 	path = submodules/pack/color/start/awesome-vim-colorschemes
 	url = git@github.com:rafi/awesome-vim-colorschemes.git

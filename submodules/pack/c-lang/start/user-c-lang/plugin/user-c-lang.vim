@@ -15,4 +15,4 @@ endif
 endfunction
 
 
-autocmd FileType c call C_loading()
+autocmd FileType c,cpp call C_loading()
