@@ -4,9 +4,6 @@
 [submodule "submodules/fzf"]
 	path = submodules/pack/fzf/start/fzf
 	url = https://github.com/junegunn/fzf.git
-[submodule "submodules/pack/base/start/vim-airline"]
-	path = submodules/pack/status-bar/start/vim-airline
-	url = git@github.com:vim-airline/vim-airline.git
 [submodule "submodules/pack/color/start/awesome-vim-colorschemes"]
 	path = submodules/pack/color/start/awesome-vim-colorschemes
 	url = git@github.com:rafi/awesome-vim-colorschemes.git
@@ -17,7 +14,7 @@
 	path = submodules/pack/lib/start/AutoComplPop
 	url = git@github.com:vim-scripts/AutoComplPop.git
 [submodule "submodules/pack/lib/opt/editorconfig"]
-	path = submodules/pack/lib/opt/editorconfig
+	path = submodules/pack/lib/start/editorconfig
 	url = git@github.com:editorconfig/editorconfig-vim
 [submodule "submodules/pack/c-lang/opt/tagbar"]
 	path = submodules/pack/c-lang/opt/tagbar
@@ -28,18 +25,9 @@
 [submodule "submodules/pack/base/opt/auto-pairs"]
 	path = submodules/pack/base/start/auto-pairs
 	url = git@github.com:jiangmiao/auto-pairs
-[submodule "submodules/pack/base/start/bufexplorer"]
-	path = submodules/pack/base/start/bufexplorer
-	url = git@github.com:jlanzarotta/bufexplorer
 [submodule "submodules/pack/wiki/start/vimwiki"]
 	path = submodules/pack/wiki/start/vimwiki
 	url = git@github.com:vimwiki/vimwiki
 [submodule "submodules/pack/fzf/start/fzf.vim"]
 	path = submodules/pack/fzf/start/fzf.vim
 	url = git@github.com:junegunn/fzf.vim
-[submodule "submodules/pack/ui/start/quickmenu.vim"]
-	path = submodules/pack/ui/start/quickmenu.vim
-	url = git@github.com:skywind3000/quickmenu.vim.git
-[submodule "submodules/pack/lsb/start/ale"]
-	path = submodules/pack/lsb/start/ale
-	url = https://github.com/w0rp/ale.git

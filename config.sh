@@ -1,5 +1,5 @@
 # User color theme
-THEME=easy
+THEME=easy2
 
 export PATH="$HOME/Software/installed/bin:$SIMPLE_CONFIG/bin:$PATH"
 

@@ -11,10 +11,9 @@ silent! nunmap +
 nnoremap + <C-w>_<C-w><Bar>
 
 " A good menu ui for user
-noremap <leader>m :call quickmenu#toggle(0)<cr>
-noremap <leader>l :call g:quickmenu#toggle(g:quickmenu_last_counter)<cr>
+noremap <leader>m :emenu <C-Z>
 
-" Tab complet
+" Tab complete
 inoremap <tab> <C-n>
 vnoremap <tab> zA<Esc>
 vnoremap <leader>f zf
@@ -22,7 +21,7 @@ vnoremap <leader>d zd
 
 " set wiki menu
 autocmd FileType vimwiki
-  \ noremap <leader>w :call Quickmenu_toggle('wiki')<cr>
+  \ noremap <leader>w :emenu Wiki.<C-Z>
 
 " wiki resolve link handler
 function! s:cmd_resolve_link(link_text)
@@ -43,6 +42,11 @@ function! s:cmd_resolve_link(link_text)
         let link_infos.filename = link_text[5:]
         let link_infos.index = 1
         return link_infos
+    elseif link_text =~# '^dir:'
+        let link_infos.scheme = 'dir'
+        let link_infos.filename = link_text[4:]
+        let link_infos.index = 1
+        return link_infos
     elseif link_text =~# '^vim:'
         let link_infos.scheme = 'vim'
         let link_infos.filename = link_text[4:]
@@ -52,6 +56,7 @@ function! s:cmd_resolve_link(link_text)
         return vimwiki#base#resolve_link(a:link_text)
     endif
 endfunction
+
 
 " wiki remap link handler
 function! VimwikiLinkHandler(link)
@@ -70,6 +75,11 @@ function! VimwikiLinkHandler(link)
         return 1
     elseif link_infos.scheme == 'run-bash'
         exec '!' . fnameescape(link_infos.filename)
+        return 1
+    elseif link_infos.scheme == 'dir'
+        exec 'cd ' . fnameescape(link_infos.filename)
+        close
+        call EnhanceReadls()
         return 1
     elseif link_infos.scheme == 'vim'
         exec link_infos.filename
@@ -99,11 +109,6 @@ let command = getline(line("."))
     exec command
 endfunction
 nnoremap <F5> :call RunVimCommand()<CR>
-
-
-function! Main_Menu()
-    call g:Quickmenu_toggle("main")
-endfunction
 
 
 function! UseFZFMenu(fzf_menu)
@@ -156,6 +161,7 @@ function! EnhanceReadls()
                 \ nonumber
                 \ noswapfile
 
+    put = '[[dir:..]]'
     exec 'r!map vim-extend *'
     set filetype=vimwiki
     goto | delete
@@ -163,4 +169,29 @@ function! EnhanceReadls()
 
     " command for list result
     nnoremap <buffer><silent> q :close<CR>
+endfunction
+
+
+" add Project manager
+function! g:Project_save ()
+    mksession! Project.vim
+    silent!touch Projectx.vim
+    echo "Project save success"
+endfunction
+
+
+function! g:Project_config ()
+    tabnew | edit Projectx.vim
+endfunction
+
+
+function! g:Grep_Git ()
+    set grepprg=git\ --no-pager\ grep\ --no-color\ -n\ $*
+    set grepformat=%f:%l:%m,%m\ %f\ match%ts,%f
+endfunction
+
+
+function! g:Grep_Reset ()
+    set grepprg=grep\ -n\ $*\ /dev/null
+    set grepformat=%f:%l:%m,%f:%l%m,%f\ \ %l%m
 endfunction

@@ -4,5 +4,5 @@
 if is file $1; then
     echo "[[file:$1]]"
 else
-    echo "[[vim:cd $1]]"
+    echo "[[dir:$1]]"
 fi
