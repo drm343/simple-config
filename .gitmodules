@@ -23,7 +23,7 @@
 	path = submodules/pack/c-lang/opt/gen_tags
 	url = git@github.com:jsfaint/gen_tags.vim
 [submodule "submodules/pack/base/opt/auto-pairs"]
-	path = submodules/pack/base/start/auto-pairs
+	path = submodules/pack/base/opt/autopair
 	url = git@github.com:jiangmiao/auto-pairs
 [submodule "submodules/pack/wiki/start/vimwiki"]
 	path = submodules/pack/wiki/start/vimwiki
