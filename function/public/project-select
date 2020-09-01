@@ -1,4 +1,0 @@
-#!/usr/bin/env bash
-project-select () {
-    editor -S `find ~ -name Project.vim | fzf` `pwd`
-}

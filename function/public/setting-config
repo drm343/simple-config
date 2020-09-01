@@ -1,4 +1,0 @@
-#!/usr/bin/env bash
-setting-config() {
-    editor $SIMPLE_CONFIG/config.sh
-}
