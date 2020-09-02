@@ -1,5 +1,5 @@
 # User color theme
-THEME=easy2
+THEME=urxvt
 
 export PATH="$HOME/Software/installed/bin:$SIMPLE_CONFIG/bin:$PATH"
 

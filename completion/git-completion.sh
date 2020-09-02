@@ -1,0 +1,1 @@
+/home/erlin/.config/simple-config/plugin/distro/slackware/completion/git-completion.sh

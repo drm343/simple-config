@@ -33,10 +33,9 @@ export LESS_TERMCAP_ue=$'\e[0m'
 
 
 color_word="$USER"
-set_fg_color yellow
+set_fg_color black
+set_bg_color white
 FORMATED_USER=$color_word
-
-DATE_FROM_FORMAT='date "+%Y-%m-%d %H:%M %A"'
 
 
 if [ -n "$DESK_NAME" ]; then
@@ -52,6 +51,6 @@ set_bg_color white
 set_fg_color black
 COLOR_PATH=$color_word
 
-export PS1="$FORMATED_USER : $(fgcolor lightgreen)\$($DATE_FROM_FORMAT)$(fgcolor end)\n[$COLOR_PATH]\n$SHOW_ENV> "
+export PS1="$FORMATED_USER : [$COLOR_PATH]\n$SHOW_ENV> "
 
 less_color

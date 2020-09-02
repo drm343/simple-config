@@ -48,9 +48,17 @@ filetype plugin indent on
 
 
 " vimwiki custom
-let g:vimwiki_list = [{
-  \ 'template_path': '$HOME/vimwiki/templates',
-  \ 'template_default': 'default'}]
+let wiki0 = {}
+let wiki0.path = '~/vimwiki'
+let wiki0.path_html = '~/vimwiki_html/'
+let wiki0.template_path = '~/vimwiki/templates'
+let wiki0.template_default = 'default'
+
+let wiki1 = {}
+let wiki1.path = '~/vimwiki/doc'
+let wiki1.path_html = '~/vimwiki_html/doc'
+
+let g:vimwiki_list = [wiki0, wiki1]
 
 
 let g:vimwiki_diary_months = {
@@ -85,3 +93,58 @@ augroup VIMRC
   autocmd BufLeave *.h   normal! mH
   autocmd BufLeave *.vim normal! mV
 augroup END
+
+
+set laststatus=2
+set statusline=
+set statusline+=%2*
+set statusline+=%{StatuslineMode()}
+set statusline+=%1*
+set statusline+=%y
+set statusline+=%4*
+set statusline+=:
+set statusline+=%n
+set statusline+=:
+set statusline+=%5*
+set statusline+=%l
+set statusline+=/
+set statusline+=%L
+set statusline+=%1*
+set statusline+=%m
+set statusline+=%r
+set statusline+=%=
+set statusline+=<
+set statusline+=<
+set statusline+=%.20f
+set statusline+=>
+set statusline+=>
+hi User2 ctermbg=lightgreen ctermfg=black guibg=lightgreen guifg=black
+hi User1 ctermbg=black ctermfg=white guibg=black guifg=white
+hi User3 ctermbg=black ctermfg=lightblue guibg=black guifg=lightblue
+hi User4 ctermbg=black ctermfg=lightgreen guibg=black guifg=lightgreen
+hi User5 ctermbg=black ctermfg=magenta guibg=black guifg=magenta
+
+function! StatuslineMode()
+  let l:mode=mode()
+  if l:mode==#"n"
+    return "NORMAL"
+  elseif l:mode==?"v"
+    return "VISUAL"
+  elseif l:mode==#"i"
+    return "INSERT"
+  elseif l:mode==#"R"
+    return "REPLACE"
+  elseif l:mode==?"s"
+    return "SELECT"
+  elseif l:mode==#"t"
+    return "TERMINAL"
+  elseif l:mode==#"c"
+    return "COMMAND"
+  elseif l:mode==#"!"
+    return "SHELL"
+  endif
+endfunction
+
+autocmd Filetype qf setlocal statusline=\ %n\ \ %f%=%L\ lines
+
+let g:coqtop_parameter="-Q . LF"

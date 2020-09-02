@@ -1,3 +1,4 @@
+%template doc
 = 前言 =
 
 本文件使用 vimwiki 撰寫，使用 enter 可以從連結跳轉到對應文件，backspace 可以跳

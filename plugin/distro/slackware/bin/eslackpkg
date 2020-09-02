@@ -1,0 +1,258 @@
+#!/usr/bin/env bash
+PACKAGE=/var/log/packages
+
+help-this () {
+echo $0
+echo "find: search package"
+echo "check: search and read content from a package"
+echo "remove: remove select package"
+echo "all: pass all installed packages as parameter for other command"
+echo "requires: setup sbo require source packages"
+echo "download: download sbo source package"
+echo "build: build sbo package"
+echo "install: install sbo package"
+echo "auto-install: auto build and install sbo package"
+echo "version: check sbo package version"
+echo "auto-version: check all sbo package version"
+}
+
+eslackpkg-check () {
+local file=$(ls $PACKAGE/* | fzf)
+if is file $file; then
+    vim -m $file
+fi
+}
+
+eslackpkg-remove () {
+    # remove "remove" from parameter
+    shift
+
+    select-then-remove () {
+        local result=`ls $PACKAGE | fzf`
+        if [ ! -z "$result" ]; then
+            sudo removepkg $result
+        fi
+    }
+
+    remove-current () {
+        local result=`ls ./*t?z`
+
+        if [ ! -z "$result" ]; then
+            sudo removepkg $result
+        fi
+    }
+
+    case $1 in
+        "current")
+            remove-current
+            ;;
+        "select")
+            select-then-remove
+            ;;
+        *)
+            echo "select: select a installed package and remove"
+            echo "current: remove all package in this directory"
+            ;;
+    esac
+}
+
+
+eslackpkg-download () {
+    # remove "remove" from parameter
+    shift
+
+    auto-download () {
+        local file_url=`cat ./*.info | grep "DOWNLOAD=" | sed "s/^.*=//" | tr -d "\""`
+        local file_name=`basename $file_url`
+        curl -L $file_url --output $file_name
+    }
+
+    select-then-download () {
+        local file_url=`cat ./*.info | fzf | sed "s/^.*=//" | tr -d "\""`
+
+        if is not empty $file_url; then
+            local file_name=`basename $file_url`
+            curl -L $file_url --output $file_name
+        else
+            echo "without url"
+        fi
+    }
+
+echo $@
+    case $1 in
+        "auto")
+            auto-download
+            ;;
+        "select")
+            select-then-download
+            ;;
+        *)
+            echo "auto: auto download source"
+            echo "select: select download source version(for 64-bits version)"
+            return 1
+            ;;
+    esac
+}
+
+
+eslackpkg-version () {
+    shift
+
+    case $1 in
+        "from")
+            local FULL_PATH=$2
+            ;;
+        "select")
+            local FULL_PATH=$(find /var/log/packages/ -name '*SBo' | fzf)
+            ;;
+        *)
+            echo "from: check package version from parameter"
+            echo "select: select package and check version"
+            return 1
+            ;;
+    esac
+
+
+    if is empty $FULL_PATH; then
+        echo "not select package"
+        return 1
+    fi
+    local PACKAGE=$(basename $FULL_PATH)
+
+    IFS="-" command eval 'LINE=($(echo $PACKAGE))'
+    for i in ${LINE[@]};
+    do
+        if is version "$i";
+        then
+            local CURRENT_VERSION="$i"
+            break
+        else
+            if is empty $PACKAGE_NAME;
+            then
+                local PACKAGE_NAME="$i"
+            else
+                local PACKAGE_NAME="$PACKAGE_NAME-$i"
+            fi
+        fi
+    done
+
+    # This command work in bash prompt.
+    # But not work in script.
+    # find /opt/Program/ -name "$PACKAGE_NAME$*.info
+    local info_path=`find /opt/Program/ -name "$PACKAGE_NAME*.info" | grep "$PACKAGE_NAME\/"`
+
+    if is empty $info_path; then
+        echo "not found $PACKAGE_NAME"
+        return 1
+    fi
+
+    local package_version=`egrep -i "VERSION" $info_path \
+        | sed "s/VERSION=\"\(.*\)\"/\1/"`
+
+    if is not eq $CURRENT_VERSION $package_version; then
+        echo "$PACKAGE"
+        echo "new: $package_version"
+        echo "current: $CURRENT_VERSION"
+        echo "-----------------------"
+    fi
+}
+
+
+eslackpkg-set-requires () {
+local require_packages=`egrep -i "Requires" ./*.info | sed "s/REQUIRES=\"\(.*\)\"/\1/"`
+for package in $require_packages;
+do
+    command pushd `find ../.. -name "$package"` > /dev/null
+    eslackpkg-set-requires
+done
+}
+
+eslackpkg-auto-install () {
+set -e
+package_name=`pwd`
+eslackpkg requires > requires
+PACKAGE=$HOME/Software/queue/$(basename $package_name)
+mkdir -p $PACKAGE
+
+for a in `cat requires`; do 
+    if is eq $off 1; then
+        off=0; 
+        result=`find /var/log/packages/* -name "*$(basename $a)*"`
+
+        if is empty $result; then
+            pushd $a
+            eslackpkg download auto
+            eslackpkg build
+            OUTPUT=$HOME/Software/queue/$(basename `pwd`)
+            popd
+            pushd $PACKAGE
+            sudo ln -s $OUTPUT/*tgz .
+            eslackpkg install
+            popd
+        fi
+    else  
+        off=1;
+    fi;
+done
+rm requires
+}
+
+passing=""
+for i in $@;
+do
+    result=`echo $i | grep "="`
+    if [ ! -z "$result" ]; then
+        passing+="$result "
+    fi
+done
+
+
+case $1 in
+    "find")
+        ls $PACKAGE | fzf
+        ;;
+    "check")
+        eslackpkg-check
+        ;;
+    "remove")
+        eslackpkg-remove $@
+        ;;
+    "all")
+        find $PACKAGE/*
+        ;;
+    "requires")
+        eslackpkg-set-requires
+        dirs -v
+        ;;
+    "download")
+        eslackpkg-download $@
+        ;;
+    "build")
+        USER=`whoami`
+        OUTPUT=$HOME/Software/queue/$(basename `pwd`)
+        sudo $passing TMP=$OUTPUT/SBo OUTPUT=$OUTPUT sh `ls *SlackBuild`
+        sudo chown $USER:users $OUTPUT
+        ;;
+    "install")
+        sudo upgradepkg --install-new ./*.t?z
+        ;;
+    "auto-install")
+        eslackpkg-auto-install
+        ;;
+    "help")
+        help-this $0
+        ;;
+    "version")
+        eslackpkg-version $@
+        ;;
+    "auto-version")
+        FULL_PATH=$(find /var/log/packages/ -name '*SBo')
+        for i in $FULL_PATH;
+        do
+            eslackpkg-version version from $i
+        done
+        ;;
+    *)
+        help-this $0
+        ;;
+esac

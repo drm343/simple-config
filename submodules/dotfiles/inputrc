@@ -1,0 +1,29 @@
+set editing-mode vi
+
+# Use for completion with case insensitive
+set completion-ignore-case on
+set completion-prefix-display-length 3
+
+
+$if mode=vi
+$if Bash
+    set show-all-if-unmodified on
+    set keyseq-timeout 1
+
+    # Show vi mode for bash
+    set show-mode-in-prompt on
+
+    set keymap vi-command
+    # these are for vi-command mode
+    "\e[A": history-search-backward
+    "\e[B": history-search-forward
+    j: history-search-forward
+    k: history-search-backward
+    set keymap vi-insert
+    # these are for vi-insert mode
+    "\e[A": history-search-backward
+    "\e[B": history-search-forward
+    set show-all-if-ambiguous on
+    TAB: menu-complete
+$endif
+$endif

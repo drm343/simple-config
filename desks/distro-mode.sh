@@ -24,7 +24,7 @@ Remove () {
 Install () {
     Install_Local () {
         pushd $SIMPLE_CONFIG/$1
-        ln -s $SIMPLE_CONFIG/distro/$DISTRO/$1/* .
+        ln -s $SIMPLE_CONFIG/plugin/distro/$DISTRO/$1/* .
         popd
     }
 

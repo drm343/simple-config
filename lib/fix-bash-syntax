@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+alias end-case=esac
+alias end-if=fi
+alias loop=do
+alias end-loop=done

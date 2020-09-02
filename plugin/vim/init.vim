@@ -11,4 +11,4 @@ source $VIM_CONFIG/cmd.vim
 source $VIM_CONFIG/menu.vim
 
 " load start screen
-source $VIM_CONFIG/start-screen.vim
+"source $VIM_CONFIG/start-screen.vim

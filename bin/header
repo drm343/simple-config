@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+. $SIMPLE_CONFIG/lib/is.sh
+
+
+if is lt "$#" 1; then
+    echo "without path"
+    exit
+fi
+
+for i in "$@"; do
+    if is dir "$i"; then
+        if is existing "$i"; then
+            :
+        else
+            echo "$i is not existing"
+            exit
+        fi
+    else
+        echo "$i is not dir"
+        exit
+    fi
+done
+
+
+echo "search $@"
+
+A=`find $@ -name "*.h" | fzf`
+
+if is file $A; then
+    vim $A
+elif is empty "$A"; then
+    echo "without select"
+else
+    echo "$A is not a header file"
+fi

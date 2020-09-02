@@ -24,6 +24,7 @@ nmenu 20.550 File.Quit :q<CR>
 " add buffer manager
 nmenu <silent> 30.500 Buffer.Replace :buffer <C-Z>
 nmenu <silent> 30.501 Buffer.Split :sbuffer <C-Z>
+nmenu <silent> 30.502 Buffer.Delete :bdelete <C-Z>
 
 
 " quickfix 選單
@@ -34,9 +35,8 @@ nmenu <silent> 40.503 QuickFix.Close :cclose<CR>
 
 
 " Project manager
-nmenu <silent> 50.501 Project.Create :call Project_save()<CR>
+nmenu <silent> 50.501 Project.Save :call Project_save()<CR>
 nmenu <silent> 50.502 Project.Setting :call Project_config()<CR>
-nmenu <silent> 50.503 Project.Save :wa<CR>
 nmenu <silent> 50.503 Project.Close :qa<CR>
 
 
@@ -55,8 +55,9 @@ menutrans clear
 " And vimwiki did not provide a global function to rebuild menu.
 unmenu Tab
 unmenu Config
-unmenu Old\ File
+unmenu File
 unmenu Buffer
 unmenu Project
+unmenu QuickFix
 unmenu Wiki
 endfunction

@@ -34,19 +34,6 @@ function! Start()
 endfunction
 
 
-function! OpenTutorialDoc()
-    edit $SIMPLE_CONFIG/doc/vim-tutorial-zh_TW.wiki
-    set filetype=vimwiki
-endfunction
-
-
-function! GDBStart()
-    packadd termdebug
-endfunction
-
-
 if argc() == 0
     autocmd VimEnter * call Start()
-elseif and(argc() == 1, argv(0) == "gdb")
-    autocmd VimEnter * call GDBStart()
 endif

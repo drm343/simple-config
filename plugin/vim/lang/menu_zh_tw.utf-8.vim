@@ -24,6 +24,7 @@ nmenu 20.551 檔案.關閉 :q<CR>
 " add buffer manager
 nmenu <silent> 30.500 緩衝區.取代視窗 :buffer <C-Z>
 nmenu <silent> 30.501 緩衝區.開新視窗 :sbuffer <C-Z>
+nmenu <silent> 30.502 緩衝區.刪除 :bdelete <C-Z>
 
 
 " quickfix 選單
@@ -34,9 +35,8 @@ nmenu <silent> 40.503 QuickFix.關閉 :cclose<CR>
 
 
 " Project manager
-nmenu <silent> 50.501 專案.建立新專案 :call Project_save()<CR>
+nmenu <silent> 50.501 專案.儲存專案 :call Project_save()<CR>
 nmenu <silent> 50.502 專案.設定 :call Project_config()<CR>
-nmenu <silent> 50.503 專案.儲存 :wa<CR>
 nmenu <silent> 50.503 專案.關閉專案 :qa<CR>
 
 
@@ -54,8 +54,9 @@ menutrans clear
 " And vimwiki did not provide a global function to rebuild menu.
 unmenu 分頁
 unmenu 設定檔
-unmenu 舊檔案
+unmenu 檔案
 unmenu 緩衝區
+unmenu QuickFix
 unmenu 專案
 unmenu Wiki
 endfunction

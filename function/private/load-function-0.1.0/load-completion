@@ -1,7 +1,0 @@
-#!/usr/bin/env bash
-load-completion () {
-    for i in $SIMPLE_CONFIG/completion/*;
-    do
-        . $i;
-    done
-}

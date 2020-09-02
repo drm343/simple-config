@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+show-all-color(){
+    for c; do
+        printf '\e[48;5;%dm%03d' $c $c
+    done
+    printf '\e[0m \n'
+}
+
+IFS=$' \t\n'
+show-all-color {0..15}
+for ((i=0;i<6;i++)); do
+    show-all-color $(seq $((i*36+16)) $((i*36+51)))
+done
+show-all-color {232..255}

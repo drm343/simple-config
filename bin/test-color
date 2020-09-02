@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+fg-color $1 && bg-color $2 && echo hello && printf '\e[0m'

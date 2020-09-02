@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+printf '\e[38;5;%dm' $1

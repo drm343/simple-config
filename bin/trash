@@ -1,11 +1,30 @@
 #!/usr/bin/env bash
+. $SIMPLE_CONFIG/lib/is.sh
 TRASH=$HOME/.local/share/trash
+
+help_trash () {
+    echo "[command]: vim-backup clear remove"
+    echo ""
+    echo "vim-backup: remove vim backup files."
+    echo "clear: remove other useless files."
+    echo "remove: move file to trash."
+}
 
 case $1 in
     "vim-backup")
         rm -r $TRASH/vim/{backup,swp,undo}/*
         ;;
+    "clear")
+        rm -r $TRASH/other/*
+        ;;
+    "remove")
+        if is file "$2" ; then
+            mv $2 $TRASH/other/
+        else
+            help_trash
+        fi
+        ;;
     *)
-        echo $1
+        help_trash
         ;;
 esac

@@ -10,12 +10,18 @@ export SIMPLE_CONFIG=$HOME/.config/simple-config
 . $SIMPLE_CONFIG/submodules/desk/shell_plugins/bash/desk
 
 # Load enhance command
-. $SIMPLE_CONFIG/function/private/load-function-0.1.0/load-function 
+. $SIMPLE_CONFIG/lib/fix-bash-syntax
+. $SIMPLE_CONFIG/lib/load-function 
 
-for i in $SIMPLE_CONFIG/function/{private,public}/*;
+for i in $SIMPLE_CONFIG/lib/*;
 do
     load-function $i
 done
+
+
+# Load enhance command
+load-function $SIMPLE_CONFIG/enable;
+
 
 # thanks for http://simple-configrcgenerator.com/
 . $SIMPLE_CONFIG/themes/$THEME

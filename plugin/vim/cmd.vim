@@ -13,15 +13,21 @@ nnoremap + <C-w>_<C-w><Bar>
 " A good menu ui for user
 noremap <leader>m :emenu <C-Z>
 
-" Tab complete
-inoremap <tab> <C-n>
+" Fold: use in set foldmethod=manual
 vnoremap <tab> zA<Esc>
 vnoremap <leader>f zf
 vnoremap <leader>d zd
 
+
 " set wiki menu
 autocmd FileType vimwiki
   \ noremap <leader>w :emenu Wiki.<C-Z>
+
+
+" 
+autocmd FileType coq
+  \ noremap <leader>w :CoqRunToCursor<CR>
+
 
 " wiki resolve link handler
 function! s:cmd_resolve_link(link_text)
@@ -194,4 +200,10 @@ endfunction
 function! g:Grep_Reset ()
     set grepprg=grep\ -n\ $*\ /dev/null
     set grepformat=%f:%l:%m,%f:%l%m,%f\ \ %l%m
+endfunction
+
+
+function! OpenTutorialDoc()
+    edit $SIMPLE_CONFIG/doc/vim-tutorial-zh_TW.wiki
+    set filetype=vimwiki
 endfunction

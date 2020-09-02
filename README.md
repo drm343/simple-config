@@ -18,22 +18,26 @@ Config for bash
 
 * git clone git@github.com:drm343/simple-config.git
 
-### 2. Run plugin/install.sh in simple-config
+
+### 2. Run make install in simple-config
 
 * cd .config/simple-config
 
-* bash ./plugin/install.sh
+* make install
 
-This will backup your origin .bashrc to .bashrc.bk, then source it in .bashrc.
+This step will ask you to backup your .bashrc to .bashrc.bk.
+And backup your origin .vimrc to .vimrc.bk.
+
+
+### 3. Source your ~/.bashrc
+
 
 ## Uninstall
 
-Remove simple-config and mv .bashrc.bk to .bashrc
+Remove simple-config and mv your backup file to origin position.
 
 ## How to use
 
 Just type m and enter, you will see command menu.
 
 Bash use menu-complete, not complete. You can comment 'TAB:menu-complete' to use origin complete behavior in config.sh.
-
-If you want to use vim-keysound. Open plugin/vim/user.vim and let g:keysound_enable = 1. Make sure install python-sdl2 or python3-sdl2.

@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+. $SIMPLE_CONFIG/lib/is.sh
+
+
+project-select () {
+    PROJECT=`find ~ -name Project.vim | fzf`
+
+    if is file $PROJECT and is eq "Project.vim" "$PROJECT"; then
+        vim -S $PROJECT
+    else
+        echo "not load project file"
+    fi
+}

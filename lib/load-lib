@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+. $SIMPLE_CONFIG/lib/fix-bash-syntax
+
+BASH_LIB_PATH=$SIMPLE_CONFIG/lib
+
+load-lib () {
+if find $BASH_LIB_PATH -name "$1-*"; then
+    load-function "$BASH_LIB_PATH/$1-*"
+else
+    echo $1 "not found"
+fi
+}

@@ -2,7 +2,7 @@
 #
 #color: cyan magenta red lightgreen green black lightyellow
 #       white
-. $SIMPLE_CONFIG/function/lib/shml-1.1.0/shml.sh
+. $SIMPLE_CONFIG/lib/shml-1.1.0/shml.sh
 
 function set_bg_color () {
     color_word="\[$(bgcolor $1)\]$color_word\[$(bgcolor end)\]"

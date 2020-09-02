@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+. $SIMPLE_CONFIG/lib/fix-bash-syntax
+
+load-completion () {
+    for i in $SIMPLE_CONFIG/completion/*; do
+        . $i;
+    done
+}

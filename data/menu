@@ -1,12 +1,15 @@
-cd-home[0m
-cd-pwd[0m
+dirs -v
+dirs_goto
+dirs_goto_pwd
+dirs_pop
+dirs_push
 distro-mode[0m
-ecd[0m
-ecp[0m
-fzf-regen-menu[0m
+enhance-command.menu[0m
 git-mode[0m
 hello-mode[0m
-project-select[0m
-reload-menu[0m
-setting-config[0m
+py3-bc[0m
+py3-smtp[0m
+py3-tg[0m
+reload-menu
+setting-config
 xrandr-mode[0m

@@ -1,0 +1,1 @@
+../plugin/setting-config.plugin.bash

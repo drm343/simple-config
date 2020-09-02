@@ -1,0 +1,1 @@
+../plugin/goto.plugin.bash
