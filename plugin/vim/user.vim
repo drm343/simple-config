@@ -38,9 +38,6 @@ set guifont=Monospace\ 28
 " use <leader> key with space, habit from spacemacs.
 let mapleader = " "
 
-" setup colorscheme
-colorscheme deep-space
-
 " setup colorscheme, need to install syntax check plugin
 syntax enable
 filetype plugin on
