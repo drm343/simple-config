@@ -1,9 +1,6 @@
 [submodule "submodules/desk"]
 	path = submodules/desk
 	url = git@github.com:jamesob/desk.git
-[submodule "submodules/fzf"]
-	path = submodules/pack/fzf/start/fzf
-	url = https://github.com/junegunn/fzf.git
 [submodule "submodules/pack/lib/start/L9"]
 	path = submodules/pack/lib/start/L9
 	url = git@github.com:vim-scripts/L9.git
@@ -25,6 +22,6 @@
 [submodule "submodules/pack/wiki/start/vimwiki"]
 	path = submodules/pack/wiki/start/vimwiki
 	url = git@github.com:vimwiki/vimwiki
-[submodule "submodules/pack/fzf/start/fzf.vim"]
-	path = submodules/pack/fzf/start/fzf.vim
-	url = git@github.com:junegunn/fzf.vim
+[submodule "submodules/fzy"]
+	path = submodules/fzy
+	url = https://github.com/jhawthorn/fzy.git

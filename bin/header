@@ -24,7 +24,7 @@ done
 
 echo "search $@"
 
-A=`find $@ -name "*.h" | fzf`
+A=`find $@ -name "*.h" | fzy`
 
 if is file $A; then
     vim $A

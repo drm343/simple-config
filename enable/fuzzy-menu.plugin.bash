@@ -1,0 +1,1 @@
+../plugin/fuzzy-menu.plugin.bash

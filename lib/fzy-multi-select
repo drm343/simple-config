@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+. $SIMPLE_CONFIG/lib/is.sh
+
+
+fzy_multi_select () {
+    if is empty "$1";
+    then
+        return
+    fi
+
+    tmpfile=$(mktemp select.XXXXXX)
+
+    CHOOSE="start"
+    SELETED=""
+
+    while is not empty "$CHOOSE";
+    do
+        CHOOSE=$($1 | fzy -p "$SELETED>")
+
+        SELETED="$SELETED $CHOOSE"
+
+        echo "$CHOOSE" >> $tmpfile
+    done
+
+    tmpfile_2=$(mktemp select.XXXXXX)
+
+    sort $tmpfile | uniq > $tmpfile_2
+    rm "$tmpfile"
+    echo $tmpfile_2
+}

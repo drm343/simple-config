@@ -1,8 +1,7 @@
 #!/usr/bin/env bash
-fzf-menu () {
-    local command=`cat \
-        $SIMPLE_CONFIG/data/menu \
-        | fzf`
+fuzzy-menu () {
+    local command=$(cat $SIMPLE_CONFIG/data/menu \
+        | fzy)
 
     local command_mode=`echo "$command" | grep "mode"`
     local menu_mode=`echo "$command" | grep "\.menu"`
@@ -16,4 +15,4 @@ fzf-menu () {
     fi
 }
 
-alias m='fzf-menu'
+alias m='fuzzy-menu'

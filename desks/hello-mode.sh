@@ -15,9 +15,9 @@ help () {
 
 # open menu
 hello-menu () {
-    local command=`echo "hello
+    local command=$(echo "hello
 help
-exit" | fzf`
+exit" | fzy)
     $command
 }
 

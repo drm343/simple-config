@@ -1,7 +1,0 @@
-#!/usr/bin/env bash
-pushd $HOME
-select=`ls .xinitrc.* | fzf`
-
-rm .xinitrc
-ln -s $select .xinitrc
-popd

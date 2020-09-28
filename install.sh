@@ -76,3 +76,9 @@ mkdir -p ~/.local/share/trash/vim/{backup,swp,undo}
 
 echo "create trash dir for others"
 mkdir -p ~/.local/share/trash/other 
+
+
+pushd $SIMPLE_CONFIG/submodules/fzy
+make
+sudo make install
+popd

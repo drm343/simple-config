@@ -5,7 +5,7 @@
 
 # Switch screen with xrandr
 xrandr-switch () {
-    `ls ~/.screenlayout/* | fzf`
+    $(ls ~/.screenlayout/* | fzy)
 }
 
 # this
@@ -16,10 +16,10 @@ help () {
 
 # open menu
 xrandr-menu () {
-    local command=`echo "xrandr-switch
+    local command=$(echo "xrandr-switch
 xrandr
 help
-exit" | fzf`
+exit" | fzy)
     $command
 }
 

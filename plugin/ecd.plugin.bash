@@ -1,9 +1,12 @@
 #!/usr/bin/env bash
 ecd () {
     run_ecd () {
-        echo -ne `pwd`
-        result="`ls -al | sed 1d | fzf --header 'Press esc, or select . to exit program'\
-            | awk '{print $NF}'`"
+        echo -ne $(pwd)
+        result="$(ls -al | sed 1d |
+            fzy -p 'Press esc, or select . to exit program > ' |
+            sed 's/\x1b\[[0-9;]*m//g' | # remove color control code
+            awk '{print $NF}')"
+
         if [ "$result" = "." ]; then
             result=""
         fi

@@ -7,6 +7,7 @@ Config for bash
 * readline 8.0
 * vim 8.0
 * git 2.21.0
+* fzy 1.0
 
 ## Optional
 

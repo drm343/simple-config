@@ -1,9 +1,13 @@
 #!/usr/bin/env bash
+. $SIMPLE_CONFIG/lib/fzy-multi-select
+
 erm () {
     run_erm () {
         echo -ne `pwd`
-        result="`ls -al | sed 1d | fzf -m --header 'Press esc, or select . to exit program'\
-            | awk '{print $NF}'`"
+        local COMMAND="ls -al | sed 1d"
+        local FILE=$(fzy_multi_select $COMMAND)
+        local result="$(cat $FILE | awk '{print $NF}')"
+
         if [ "$result" = "." ]; then
             echo "can't remove ."
         elif [ "$result" = ".." ]; then
@@ -28,6 +32,7 @@ erm () {
                         ;;
                 esac
             done
+            rm $FILE
         fi
     }
 

@@ -1,14 +1,7 @@
 #!/usr/bin/env bash
 function els () {
     run_els () {
-        result="`ls -d $1/* | fzf --preview '
-        if is file {}; then
-            cat {};
-        elif is dir {}; then
-            echo "dir {}";
-        else
-            echo "what is {}?"
-        fi'`"
+        result="$(ls -d $1/* | fzy)"
     }
 
     if [ ! -z "$1" ]; then

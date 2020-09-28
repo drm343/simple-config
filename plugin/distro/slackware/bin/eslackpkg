@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 PACKAGE=/var/log/packages
 
+
 help-this () {
 echo $0
 echo "find: search package"
@@ -17,7 +18,7 @@ echo "auto-version: check all sbo package version"
 }
 
 eslackpkg-check () {
-local file=$(ls $PACKAGE/* | fzf)
+local file=$(ls $PACKAGE/* | fzy)
 if is file $file; then
     vim -m $file
 fi
@@ -28,7 +29,7 @@ eslackpkg-remove () {
     shift
 
     select-then-remove () {
-        local result=`ls $PACKAGE | fzf`
+        local result=`ls $PACKAGE | fzy`
         if [ ! -z "$result" ]; then
             sudo removepkg $result
         fi
@@ -74,7 +75,7 @@ eslackpkg-download () {
     }
 
     select-then-download () {
-        local file_url=`cat ./*.info | fzf | sed "s/^.*=//" | tr -d "\""`
+        local file_url=`cat ./*.info | fzy | sed "s/^.*=//" | tr -d "\""`
 
         if is not empty $file_url; then
             local file_name=`basename $file_url`
@@ -109,7 +110,7 @@ eslackpkg-version () {
             local FULL_PATH=$2
             ;;
         "select")
-            local FULL_PATH=$(find /var/log/packages/ -name '*SBo' | fzf)
+            local FULL_PATH=$(find /var/log/packages/ -name '*SBo' | fzy)
             ;;
         *)
             echo "from: check package version from parameter"
@@ -215,7 +216,7 @@ done
 
 case $1 in
     "find")
-        ls $PACKAGE | fzf
+        ls $PACKAGE | fzy
         ;;
     "check")
         eslackpkg-check

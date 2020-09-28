@@ -51,12 +51,22 @@ Install () {
     }
 
     Install_Local enable
-    source $SIMPLE_CONFIG/enable/$DISTRO.plugin.bash
+
+    if is existing "$SIMPLE_CONFIG/enable/$DISTRO.plugin.bash";
+    then
+        source $SIMPLE_CONFIG/enable/$DISTRO.plugin.bash
+    fi
+
     Install_Local completion
     Install_Local bin
 
     DISTRO=user-custom Install_Local enable
-    DISTRO=user-custom source $SIMPLE_CONFIG/enable/$DISTRO.plugin.bash
+
+    if is existing "$SIMPLE_CONFIG/enable/user-custom.plugin.bash";
+    then
+        DISTRO=user-custom source $SIMPLE_CONFIG/enable/$DISTRO.plugin.bash
+    fi
+
     DISTRO=user-custom Install_Local completion
     DISTRO=user-custom Install_Local bin
 }
@@ -69,10 +79,10 @@ help () {
 
 # open menu
 distro-menu () {
-    local command=`echo "Install
+    local command=$(echo "Install
 Remove
 help
-exit" | fzf`
+exit" | fzy)
     $command
 }
 

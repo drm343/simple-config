@@ -13,14 +13,16 @@ reload-menu () {
         fi
     }
 
-    fzf-regen-menu () {
+    fuzzy-regen-menu () {
         # Load enhance command
         create-menu $SIMPLE_CONFIG/enable;
 
-        result=`ls \
+        result=$(ls \
             $SIMPLE_CONFIG/data/*.menu \
             $SIMPLE_CONFIG/desks/* \
-            | sed "s/.*desks\/\(.*\)\.sh/\1/"`
+            | sed "s/.*desks\/\(.*\)\.sh/\1/" \
+            | sed 's/\x1b\[[0-9;]*m//g' \
+            | sed 's/\x1b\[[0m//g')
 
         echo -en "reload-menu
 " >> $SIMPLE_CONFIG/data/menu
@@ -36,5 +38,5 @@ reload-menu () {
     source ~/.bashrc
 
     rm $SIMPLE_CONFIG/data/menu
-    fzf-regen-menu
+    fuzzy-regen-menu
 }

@@ -2,6 +2,8 @@
 #
 # Description: git menu
 #
+. $SIMPLE_CONFIG/lib/fzy-multi-select
+
 
 # this
 help () {
@@ -19,8 +21,8 @@ git-clone-repo () {
 
 # use vimdiff for check file
 git-vimdiff () {
-    local result=`git -c color.status=always status --short -uno | \
-        fzf --nth 2 --preview 'git diff --color=always -- {-1}' | awk '{print $2}'`
+    local result=$(git -c color.status=always status --short -uno | \
+    fzy | awk '{print $2}')
 
     if [ ! -z "$result" ]; then
         git difftool -y -t vimdiff HEAD $result
@@ -31,18 +33,14 @@ git-vimdiff () {
 # action about branch
 git-branch-mode () {
     git-branch () {
-        git branch -a --color=always | grep -v '/HEAD\s' | sort |
-        fzf --ansi --multi --tac --preview-window right:70% \
-        --preview 'git log --oneline --graph --date=short --pretty="format:%C(auto)%cd %h%d %s" $(sed s/^..// <<< {} | cut -d" " -f1) | head -'$LINES |
-        sed 's/^..//' | cut -d' ' -f1 |
-        sed 's#^remotes/##'
+        git branch -a --color=always | grep -v '/HEAD\s' | fzy
     }
 
-    local result=`echo "show all branch
+    local result=$(echo "show all branch
 checkout
 current branch?
 create
-delete" | fzf`
+delete" | fzy)
 
 case $result in
     "create")
@@ -70,33 +68,48 @@ esac
 
 # action about commit
 git-commit-mode () {
-    local result=`git -c color.status=always status --short | \
-        fzf -m --nth 2 \
-        --header 'Use tab to select files.' \
-        --preview 'git diff --color=always -- {-1}' | awk '{print $2}'`
+    local COMMAND="git status --short"
+    local FILE=$(mktemp git-add.XXXXXX)
 
-    git add $result
-    git commit
+    echo -en "$($COMMAND)" > $FILE
+    editor $FILE
+
+    local result=$(cat $FILE | awk -e '{print $2}')
+
+    if is not empty "$result";
+    then
+        git add $result
+        git commit
+    fi
+    rm $FILE
 }
 
 
 # action about remote
 git-remote-mode () {
     git-show-all-remotes () {
-        local result=`git remote | fzf --preview 'git remote get-url {1}'`
-        echo $result
+        local result=$(git remote | fzy)
+        echo "$result  $(git remote get-url $result)"
     }
 
     remote-change-name () {
-        local result=`git remote | fzf --preview 'git remote get-url {1}'`
-        read -p "remote's name? " NAME
-        git remote rename $result $NAME
+        local result=$(git remote | fzy)
+
+        if is not empty "$result";
+        then
+            read -p "remote's name? " NAME
+            git remote rename $result $NAME
+        fi
     }
 
     remote-change-url () {
-        local result=`git remote | fzf --preview 'git remote get-url {1}'`
-        read -p "remote's url? " URL
-        git remote set-url $result $URL
+        local result=$(git remote | fzy)
+
+        if is not empty "$result";
+        then
+            read -p "remote's url? " URL
+            git remote set-url $result $URL
+        fi
     }
 
     git-add-remote () {
@@ -106,20 +119,20 @@ git-remote-mode () {
     }
 
     git-remove-remote () {
-        local result=`git remote | fzf --preview 'git remote get-url {1}'`
+        local result=$(git remote | fzy)
 
         if [ ! -z "$result" ]; then
             git remote remove $result
         fi
     }
 
-    local result=`echo "show all remotes
+    local result=$(echo "show all remotes
 push from local
 pull from remote
 add new remote
 change remote's name
 change remote's url
-remove unused remote" | fzf`
+remove unused remote" | fzy)
 
 case $result in
     "show all remotes")
@@ -154,25 +167,33 @@ esac
 git-tag-mode () {
     git-create-tag () {
         read -p "tag name? " TAG
-        git tag -a $TAG
-        git push --tags
+
+        if is not empty "$TAG";
+        then
+            git tag -a $TAG
+            git push --tags
+        fi
     }
 
     git-remove-tag () {
-        local TAG=`git tag | fzf --preview 'git log {1}'`
-        git tag -d $TAG
-        git push origin :$TAG
-        git fetch --prune --prune-tags
+        local TAG=$(git tag | fzy)
+
+        if is not empty "$TAG";
+        then
+            git tag -d $TAG
+            git push origin :$TAG
+            git fetch --prune --prune-tags
+        fi
     }
 
-    local result=`echo "show all tags
+    local result=$(echo "show all tags
 sync tags
 create tag
-delete tag" | fzf`
+delete tag" | fzy)
 
 case $result in
     "show all tags")
-        git tag | fzf --preview 'git log {1}'
+        git tag | fzy
         ;;
     "sync tags")
         git fetch -p -P
@@ -192,8 +213,8 @@ esac
 
 # init git repo
 git-init-repo () {
-    local result=`echo "normal repo
-bare repo" | fzf`
+    local result=$(echo "normal repo
+bare repo" | fzy)
 
 case $result in
     "normal repo")
@@ -213,15 +234,14 @@ esac
 git-menu () {
     # show history log
     git-history () {
-        git log --date=short --format="%C(green)%C(bold)%cd %C(auto)%h%d %s (%an)" --graph --color=always |
-            fzf --ansi --no-sort --reverse --multi --bind 'ctrl-s:toggle-sort' \
-            --header 'Press CTRL-S to toggle sort' \
-            --preview 'grep -o "[a-f0-9]\{7,\}" <<< {} | xargs git show --color=always | head -'$LINES |
+        git log --date=short \
+            --format="%C(green)%C(bold)%cd %C(auto)%h%d %s (%an)" \
+            --graph --color=always | fzy |
             grep -o "[a-f0-9]\{7,\}"
     }
 
 
-    local result=`echo "git status
+    local result=$(echo "git status
 git-vimdiff
 git-history
 git-commit-mode
@@ -231,7 +251,7 @@ git-tag-mode
 git-clone-repo
 git-init-repo
 help
-exit" | fzf`
+exit" | fzy)
     $result
 }
 

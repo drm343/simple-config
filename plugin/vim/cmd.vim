@@ -117,38 +117,31 @@ endfunction
 nnoremap <F5> :call RunVimCommand()<CR>
 
 
-function! UseFZFMenu(fzf_menu)
-    let my_command=fzf#run({'source': a:fzf_menu, 'down': '50%'})
-    let my_command=get(my_command, 0, "")
-    if my_command =~ "^$"
-        echo "nothing"
-    else
-        exec ":call" my_command . "()"
-    endif
+function! FzyCommand(choice_command, vim_command)
+  try
+    let output = system(a:choice_command . " | fzy ")
+  catch /Vim:Interrupt/
+    " Swallow errors from ^C, allow redraw! below
+  endtry
+  redraw!
+  if v:shell_error == 0 && !empty(output)
+    exec a:vim_command . ' ' . output
+  endif
 endfunction
 
 
+"nnoremap <leader>e :call FzyCommand("find . -type f", ":e")<cr>
+"nnoremap <leader>v :call FzyCommand("find . -type f", ":vs")<cr>
+"nnoremap <leader>s :call FzyCommand("find . -type f", ":sp")<cr>
+
+
 function! EditFile()
-    let my_file_list=fzf#run({'down': '50%'})
-    let my_file=get(my_file_list, 0, "")
-    if my_file =~ "^$"
-        echo my_file_list
-        echo my_file
-        "echo "nothing"
-    else
-        exec ":open" my_file
-    endif
+    call FzyCommand("find . -type f", ":e")
 endfunction
 
 
 function! SplitEditFile()
-    let my_file_list=fzf#run({'down': '50%'})
-    let my_file=get(my_file_list, 0, "")
-    if my_file =~ "^$"
-        echo "nothing"
-    else
-        exec ":split" my_file
-    endif
+    call FzyCommand("find . -type f", ":split")
 endfunction
 
 
