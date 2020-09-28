@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+DESK=$(desk ls | fzy | awk -e '{print $1}')
+desk go $DESK

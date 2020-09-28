@@ -1,0 +1,8 @@
+unset -f user.buku
+unset -f user.ddgr
+unset -f user.howdoi
+unset -f user.fzy.menu
+
+echo "OK"
+
+unalias u

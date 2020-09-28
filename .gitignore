@@ -1,1 +1,8 @@
 desks/py3-*.sh
+plugin/py3-*
+
+bin/eslackpkg
+enable/slackware.plugin.bash
+enable/user.plugin.bash
+completion/eslackpkg-comletion.sh
+completion/git-completion.sh

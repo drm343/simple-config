@@ -7,9 +7,9 @@ distro-mode[0m
 enhance-command.menu[0m
 git-mode[0m
 hello-mode[0m
-py3-bc[0m
-py3-smtp[0m
+project.menu[0m
 py3-tg[0m
+py3-user[0m
 reload-menu
 setting-config
 xrandr-mode[0m
