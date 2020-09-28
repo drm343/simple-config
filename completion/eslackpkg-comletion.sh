@@ -1,1 +1,0 @@
-/home/erlin/.config/simple-config/plugin/distro/slackware/completion/eslackpkg-comletion.sh

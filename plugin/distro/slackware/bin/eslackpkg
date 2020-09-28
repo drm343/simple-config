@@ -62,9 +62,15 @@ eslackpkg-download () {
     shift
 
     auto-download () {
-        local file_url=`cat ./*.info | grep "DOWNLOAD=" | sed "s/^.*=//" | tr -d "\""`
-        local file_name=`basename $file_url`
-        curl -L $file_url --output $file_name
+        local file_info=$(find . -name "*.info")
+        source $file_info
+
+        for i in $DOWNLOAD;
+        do
+            echo $i
+            local file_name=$(basename $i)
+            curl -L $i --output $file_name
+        done
     }
 
     select-then-download () {

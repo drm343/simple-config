@@ -2,6 +2,8 @@
 #
 # Description: manager command for distro
 #
+. $SIMPLE_CONFIG/lib/is.sh
+
 
 # Remove distro command
 Remove () {
@@ -16,6 +18,8 @@ Remove () {
         done
     }
 
+    source $SIMPLE_CONFIG/plugin/distro/$DISTRO/uninstall
+    Remove_Local `find $SIMPLE_CONFIG/enable -type l`
     Remove_Local `find $SIMPLE_CONFIG/bin -type l`
     Remove_Local `find $SIMPLE_CONFIG/completion -type l`
 }
@@ -24,10 +28,14 @@ Remove () {
 Install () {
     Install_Local () {
         pushd $SIMPLE_CONFIG/$1
-        ln -s $SIMPLE_CONFIG/plugin/distro/$DISTRO/$1/* .
+        if is existing "$SIMPLE_CONFIG/plugin/distro/$DISTRO/$1"; then
+            ln -s ../plugin/distro/$DISTRO/$1/* .
+        fi
         popd
     }
 
+    Install_Local enable
+    source $SIMPLE_CONFIG/enable/$DISTRO.plugin.bash
     Install_Local completion
     Install_Local bin
 }

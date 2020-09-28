@@ -1,0 +1,3 @@
+slackware () {
+    echo "slackware!"
+}
