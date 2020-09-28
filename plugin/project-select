@@ -1,9 +1,23 @@
 #!/usr/bin/env bash
 . $SIMPLE_CONFIG/lib/is.sh
 
+open () {
+    if is dir $1; then
+        local FILE=$(find $1 -type f | fzy)
+    else
+        local FILE=$(find . -type f | fzy)
+    fi
+
+    if is file $FILE; then
+        vim $FILE
+    else
+        echo "file $FILE not exist"
+    fi
+}
+
 
 project-select () {
-    PROJECT=`find ~ -name Project.vim | fzf`
+    local PROJECT=`find ~ -name Project.vim | fzy`
 
     if is file $PROJECT and is eq "Project.vim" "$PROJECT"; then
         vim -S $PROJECT
@@ -11,3 +25,29 @@ project-select () {
         echo "not load project file"
     fi
 }
+
+
+project-menu () {
+    local menu="$SIMPLE_CONFIG/data/project.menu"
+
+echo -en "open
+project-select
+" >> $menu
+
+    sort $menu | uniq > $menu.bk
+    mv $menu.bk $menu
+}
+
+
+case "$1" in
+    'rebuild-menu')
+        project-menu
+        ;;
+    'help')
+        echo "usage: source $0"
+        echo ""
+        echo "usage $0 rebuild-menu"
+        ;;
+    *)
+        ;;
+esac
