@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-. $SIMPLE_CONFIG/function/private/is-1.1.0/is.sh
+. $SIMPLE_CONFIG/lib/is.sh
 
 if is file $1; then
     echo "[[file:$1]]"
