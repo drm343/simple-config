@@ -11,8 +11,6 @@ Config for bash
 
 ## Optional
 
-* python-sdl2 or python3-sdl2, use for vim-keysound
-
 ## Install
 
 ### 1. Clone this repo to your ~/.config
