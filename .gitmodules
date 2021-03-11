@@ -1,9 +1,6 @@
 [submodule "submodules/desk"]
 	path = submodules/desk
 	url = git@github.com:jamesob/desk.git
-[submodule "submodules/pack/lib/start/L9"]
-	path = submodules/pack/lib/start/L9
-	url = git@github.com:vim-scripts/L9.git
 [submodule "submodules/pack/lib/start/AutoComplPop"]
 	path = submodules/pack/lib/start/AutoComplPop
 	url = git@github.com:vim-scripts/AutoComplPop.git
@@ -13,9 +10,6 @@
 [submodule "submodules/pack/c-lang/opt/tagbar"]
 	path = submodules/pack/c-lang/opt/tagbar
 	url = git@github.com:majutsushi/tagbar
-[submodule "submodules/pack/c-lang/opt/gen_tags"]
-	path = submodules/pack/c-lang/opt/gen_tags
-	url = git@github.com:jsfaint/gen_tags.vim
 [submodule "submodules/pack/base/opt/auto-pairs"]
 	path = submodules/pack/base/start/autopair
 	url = git@github.com:jiangmiao/auto-pairs
