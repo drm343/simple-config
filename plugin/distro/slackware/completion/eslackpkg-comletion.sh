@@ -1,10 +1,11 @@
 #!/usr/bin/env bash
 _eslack_completions ()
 {
-    local commands="find check remove requires download build install all help version auto-version auto-install"
+    local commands="package remove requires download build install all help version auto-version auto-install"
     local subcommands_remove="current select"
-    local subcommands_download="auto select"
+    local subcommands_download="auto select check"
     local subcommands_version="from select"
+    local subcommands_package="find view"
 
     local cur prev
 
@@ -25,6 +26,9 @@ _eslack_completions ()
                     ;;
                 version)
                     COMPREPLY=($(compgen -W "$subcommands_version" -- ${cur}))
+                    ;;
+                package)
+                    COMPREPLY=($(compgen -W "$subcommands_package" -- ${cur}))
                     ;;
             esac
             ;;

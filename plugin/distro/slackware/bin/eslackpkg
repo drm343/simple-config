@@ -3,9 +3,9 @@ PACKAGE=/var/log/packages
 
 
 help-this () {
-echo $0
-echo "find: search package"
-echo "check: search and read content from a package"
+echo "$(basename $0) 1.0.0"
+echo ""
+echo "package: search package"
 echo "remove: remove select package"
 echo "all: pass all installed packages as parameter for other command"
 echo "requires: setup sbo require source packages"
@@ -17,12 +17,37 @@ echo "version: check sbo package version"
 echo "auto-version: check all sbo package version"
 }
 
-eslackpkg-check () {
-local file=$(ls $PACKAGE/* | fzy)
-if is file $file; then
-    vim -m $file
-fi
+
+eslackpkg-package () {
+    # remove "package" from parameter
+    shift
+
+    package-find () {
+        ls $PACKAGE | fzy
+    }
+
+    package-view () {
+        local file=$(ls $PACKAGE/* | fzy)
+        if is file $file; then
+            vim -m $file
+        fi
+    }
+
+
+    case $1 in
+        "find")
+            package-find
+            ;;
+        "view")
+            package-view
+            ;;
+        *)
+            echo "find: search package"
+            echo "view: search and read content from a package"
+            ;;
+    esac
 }
+
 
 eslackpkg-remove () {
     # remove "remove" from parameter
@@ -63,10 +88,19 @@ eslackpkg-download () {
     shift
 
     auto-download () {
+        local select_download=""
+
         local file_info=$(find . -name "*.info")
         source $file_info
 
-        for i in $DOWNLOAD;
+        if is not empty "$DOWNLOAD_x86_64"; then
+            select_download="$DOWNLOAD_x86_64"
+        else
+            select_download="$DOWNLOAD"
+        fi
+
+
+        for i in $select_download;
         do
             echo $i
             local file_name=$(basename $i)
@@ -85,7 +119,34 @@ eslackpkg-download () {
         fi
     }
 
-echo $@
+    check-md5 () {
+        local file_info=$(find . -name "*.info")
+        source $file_info
+
+        if is file "check.md5"; then
+            rm check.md5
+        fi
+        touch check.md5
+
+        if is not empty "$DOWNLOAD_x86_64"; then
+            select_download="$DOWNLOAD_x86_64"
+            select_md5="$MD5SUM_x86_64"
+        else
+            select_download="$DOWNLOAD"
+            select_md5="$MD5SUM"
+        fi
+
+        IFS=" " read -r -a md5_array <<< "$select_md5"
+        i=0
+
+        for d in ${select_download[@]}
+        do
+            echo "${md5_array[i]} $(basename $d)" >> check.md5
+            i=$(echo $(($i + 1)))
+        done
+        md5sum -c check.md5
+    }
+
     case $1 in
         "auto")
             auto-download
@@ -93,9 +154,13 @@ echo $@
         "select")
             select-then-download
             ;;
+        "check")
+            check-md5
+            ;;
         *)
             echo "auto: auto download source"
             echo "select: select download source version(for 64-bits version)"
+            echo "check: check package's md5"
             return 1
             ;;
     esac
@@ -215,11 +280,8 @@ done
 
 
 case $1 in
-    "find")
-        ls $PACKAGE | fzy
-        ;;
-    "check")
-        eslackpkg-check
+    "package")
+        eslackpkg-package $@
         ;;
     "remove")
         eslackpkg-remove $@
