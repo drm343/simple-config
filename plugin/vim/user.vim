@@ -141,7 +141,3 @@ function! StatuslineMode()
     return "SHELL"
   endif
 endfunction
-
-autocmd Filetype qf setlocal statusline=\ %n\ \ %f%=%L\ lines
-
-let g:coqtop_parameter="-Q . LF"

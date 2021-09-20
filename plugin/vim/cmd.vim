@@ -24,11 +24,6 @@ autocmd FileType vimwiki
   \ noremap <leader>w :emenu Wiki.<C-Z>
 
 
-" 
-autocmd FileType coq
-  \ noremap <leader>w :CoqRunToCursor<CR>
-
-
 " wiki resolve link handler
 function! s:cmd_resolve_link(link_text)
     let link_text = a:link_text
