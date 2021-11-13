@@ -3,7 +3,7 @@ PACKAGE=/var/log/packages
 
 
 help-this () {
-echo "$(basename $0) 1.0.0"
+echo "$(basename $0) 1.0.1"
 echo ""
 echo "package: search package"
 echo "remove: remove select package"
@@ -12,9 +12,7 @@ echo "requires: setup sbo require source packages"
 echo "download: download sbo source package"
 echo "build: build sbo package"
 echo "install: install sbo package"
-echo "auto-install: auto build and install sbo package"
-echo "version: check sbo package version"
-echo "auto-version: check all sbo package version"
+echo "package-version: check all sbo package version"
 }
 
 
@@ -108,17 +106,6 @@ eslackpkg-download () {
         done
     }
 
-    select-then-download () {
-        local file_url=`cat ./*.info | fzy | sed "s/^.*=//" | tr -d "\""`
-
-        if is not empty $file_url; then
-            local file_name=`basename $file_url`
-            curl -L $file_url --output $file_name
-        else
-            echo "without url"
-        fi
-    }
-
     check-md5 () {
         local file_info=$(find . -name "*.info")
         source $file_info
@@ -151,15 +138,11 @@ eslackpkg-download () {
         "auto")
             auto-download
             ;;
-        "select")
-            select-then-download
-            ;;
         "check")
             check-md5
             ;;
         *)
             echo "auto: auto download source"
-            echo "select: select download source version(for 64-bits version)"
             echo "check: check package's md5"
             return 1
             ;;
@@ -239,35 +222,6 @@ do
 done
 }
 
-eslackpkg-auto-install () {
-set -e
-package_name=`pwd`
-eslackpkg requires > requires
-PACKAGE=$HOME/Software/queue/$(basename $package_name)
-mkdir -p $PACKAGE
-
-for a in `cat requires`; do 
-    if is eq $off 1; then
-        off=0; 
-        result=`find /var/log/packages/* -name "*$(basename $a)*"`
-
-        if is empty $result; then
-            pushd $a
-            eslackpkg download auto
-            eslackpkg build
-            OUTPUT=$HOME/Software/queue/$(basename `pwd`)
-            popd
-            pushd $PACKAGE
-            sudo ln -s $OUTPUT/*tgz .
-            eslackpkg install
-            popd
-        fi
-    else  
-        off=1;
-    fi;
-done
-rm requires
-}
 
 passing=""
 for i in $@;
@@ -305,16 +259,10 @@ case $1 in
     "install")
         sudo upgradepkg --install-new ./*.t?z
         ;;
-    "auto-install")
-        eslackpkg-auto-install
-        ;;
     "help")
         help-this $0
         ;;
-    "version")
-        eslackpkg-version $@
-        ;;
-    "auto-version")
+    "package-version")
         FULL_PATH=$(find /var/log/packages/ -name '*SBo')
         for i in $FULL_PATH;
         do
