@@ -9,8 +9,6 @@ enhance-command.menu
 git-mode
 hello-mode
 project.menu
-py3-tg
-py3-user
 reload-menu
 setting-config
 xrandr-mode
