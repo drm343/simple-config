@@ -1,8 +1,8 @@
 " my config "
 
 " replace tab with 4 space if did not install supertab
-set tabstop=4
-set shiftwidth=4
+set tabstop=2
+set shiftwidth=2
 set expandtab
 
 " ignore case
