@@ -80,5 +80,5 @@ mkdir -p ~/.local/share/trash/other
 
 pushd $SIMPLE_CONFIG/submodules/fzy
 make
-sudo make install
+make DESTDIR=~/.local PREFIX=/ install
 popd
