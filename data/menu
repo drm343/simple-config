@@ -1,4 +1,3 @@
-bluetooth-mode
 dirs -v
 dirs_goto
 dirs_goto_pwd
