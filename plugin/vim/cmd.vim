@@ -77,11 +77,6 @@ function! VimwikiLinkHandler(link)
     elseif link_infos.scheme == 'run-bash'
         exec '!' . fnameescape(link_infos.filename)
         return 1
-    elseif link_infos.scheme == 'dir'
-        exec 'cd ' . fnameescape(link_infos.filename)
-        close
-        call EnhanceReadls()
-        return 1
     elseif link_infos.scheme == 'vim'
         exec link_infos.filename
         return 1
@@ -128,32 +123,6 @@ endfunction
 
 function! SplitEditFile()
     call FzyCommand("find . -type f", ":split")
-endfunction
-
-
-function! EnhanceReadls()
-    new
-
-    " Set some options for this buffer to make sure that does not act like a
-    " normal winodw.
-    setlocal
-                \ bufhidden=delete
-                \ buftype=nowrite
-                \ nobuflisted
-                \ nocursorcolumn
-                \ nocursorline
-                \ nolist
-                \ nonumber
-                \ noswapfile
-
-    put = '[[dir:..]]'
-    exec 'r!map vim-extend *'
-    set filetype=vimwiki
-    goto | delete
-
-
-    " command for list result
-    nnoremap <buffer><silent> q :close<CR>
 endfunction
 
 

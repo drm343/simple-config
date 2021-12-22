@@ -9,8 +9,3 @@
 = 緩衝區 =
 
 [[vim:ls|show buffer]]
-
-
-= 打開檔案 =
-
-[[vim:call EnhanceReadls()|載入當前目錄檔案]]
