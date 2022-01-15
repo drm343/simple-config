@@ -20,7 +20,7 @@
 
 
      打開基本操作教學文件請在 terminal 中輸入 vimtutor 並按下 Enter。
-     [[vim:!vimtutor|啟動 vimtutor]]
+     [[file:/usr/share/vim/vim82/tutor/tutor|啟動 vimtutor]]
 
      已經會基本操作的人，請往下繼續學習如何使用本設定檔。
 

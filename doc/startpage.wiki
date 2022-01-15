@@ -1,4 +1,0 @@
-use [[vim:enew|e]] to open new file
-use [[vim:call OpenTutorialDoc()|t]] to open tutorial
-use [[vim:quit|q]] to quit this window
-use [[vim:call Quickmenu_toggle("main")|<leader>m]] to open menu

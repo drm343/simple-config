@@ -46,16 +46,18 @@ filetype plugin indent on
 
 " vimwiki custom
 let wiki0 = {}
-let wiki0.path = '~/vimwiki'
-let wiki0.path_html = '~/vimwiki_html/'
-let wiki0.template_path = '~/vimwiki/templates'
-let wiki0.template_default = 'default'
+let wiki0.path = '~/Documents/vimwiki'
 
 let wiki1 = {}
-let wiki1.path = '~/vimwiki/doc'
-let wiki1.path_html = '~/vimwiki_html/doc'
+let wiki1.path = '~/.config/simple-config/doc'
 
-let g:vimwiki_list = [wiki0, wiki1]
+let wiki2 = {}
+let wiki2.path = '~/Documents/drm343.github.io/wiki/'
+let wiki2.path_html = '~/Documents/drm343.github.io'
+let wiki2.template_path = '~/Documents/drm343.github.io/templates'
+let wiki2.template_default = 'default'
+
+let g:vimwiki_list = [wiki0, wiki1, wiki2]
 
 
 let g:vimwiki_diary_months = {

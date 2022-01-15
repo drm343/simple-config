@@ -12,3 +12,7 @@ source $VIM_CONFIG/menu.vim
 
 " load start screen
 "source $VIM_CONFIG/start-screen.vim
+
+if filereadable("vimrc")
+    source vimrc
+endif
