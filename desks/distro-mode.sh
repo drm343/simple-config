@@ -74,7 +74,7 @@ Install () {
 
 # this
 help () {
-    desks
+    desk
 }
 
 # open menu
