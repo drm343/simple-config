@@ -59,6 +59,23 @@ function! s:cmd_resolve_link(link_text)
 endfunction
 
 
+" vimwiki convert link to html
+function! VimwikiLinkConverter(link, source_wiki_file, target_html_file)
+    if a:link =~# '^file:'
+        let link_infos = vimwiki#base#resolve_link(a:link)
+        let html_link = vimwiki#path#relpath(
+                    \ fnamemodify(a:source_wiki_file, ':h'),
+                    \ link_infos.filename)
+        let relative_link =
+                    \ fnamemodify(a:target_html_file, ':h') . '/' . html_link
+        "call system('cp ' . fnameescape(link_infos.filename) .
+        "            \ ' ' . fnameescape(relative_link))
+        return html_link
+    endif
+    return ''
+endfunction
+
+
 " wiki remap link handler
 function! VimwikiLinkHandler(link)
     let link = a:link
