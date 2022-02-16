@@ -87,7 +87,7 @@ EOF
         number)
             echo "$value_a" | grep -E '^[0-9]+(\.[0-9]+)?$'; return $?;;
         version)
-            echo "$value_a" | grep -E '^[0-9]+(\.[0-9]+){1,3}$'; return $?;;
+            echo "$value_a" | grep -E '^[0-9]+(\.[0-9]+){0,3}$'; return $?;;
         older)
             [ "$value_a" -ot "$value_b" ]; return $?;;
         newer)
