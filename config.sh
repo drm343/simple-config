@@ -1,7 +1,6 @@
 # User color theme
 THEME=urxvt
 
-export PATH="$HOME/Software/installed/bin:$SIMPLE_CONFIG/bin:$PATH"
 
 export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'
 export VIM_CONFIG="$SIMPLE_CONFIG/plugin/vim"

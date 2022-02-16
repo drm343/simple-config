@@ -1,5 +1,8 @@
 # use for slackware
 export PATH=/usr/sbin:/sbin:$PATH
+export PATH=$HOME/.local/bin:$PATH
+export PATH=$HOME/Software/installed/bin:$PATH
+export PATH=$HOME/.config/simple-config/bin:$PATH
 
 # fix for gvim
 export BASH_ENV=~/.bashrc
