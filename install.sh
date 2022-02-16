@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-git submodule init
 git submodule update
 
 
@@ -37,10 +36,6 @@ if $ans; then
     fi
 fi
 cp $DOTFILES_CONFIG/bashrc $HOME/.bashrc
-
-
-FZF_PATH=$SIMPLE_CONFIG/submodules/pack/fzf/start/fzf
-prefix=$FZF_PATH prefix_expand=$FZF_PATH $FZF_PATH/install
 
 
 PS3="do you want to backup your .vimrc? [number]: "
