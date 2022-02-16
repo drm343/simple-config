@@ -9,6 +9,7 @@ echo "package: search package"
 echo "remove: remove select package"
 echo "all: pass all installed packages as parameter for other command"
 echo "requires: setup sbo require source packages"
+echo "dependences: check installed package dependences"
 echo "download: download sbo source package"
 echo "build: build sbo package"
 echo "install: install sbo package"
@@ -17,259 +18,277 @@ echo "package-version: check all sbo package version"
 
 
 eslackpkg-package () {
-    # remove "package" from parameter
-    shift
+  # remove "package" from parameter
+  shift
 
-    package-find () {
-        ls $PACKAGE | fzy
-    }
+  package-find () {
+    ls $PACKAGE | fzy
+  }
 
-    package-view () {
-        local file=$(ls $PACKAGE/* | fzy)
-        if is file $file; then
-            vim -m $file
-        fi
-    }
+  package-view () {
+    local file=$(ls $PACKAGE/* | fzy)
+    if is file $file; then
+      vim -m $file
+    fi
+  }
 
-
-    case $1 in
-        "find")
-            package-find
-            ;;
-        "view")
-            package-view
-            ;;
-        *)
-            echo "find: search package"
-            echo "view: search and read content from a package"
-            ;;
-    esac
+  case $1 in
+    "find")
+      package-find
+      ;;
+    "view")
+      package-view
+      ;;
+    *)
+      echo "find: search package"
+      echo "view: search and read content from a package"
+      ;;
+  esac
 }
 
 
 eslackpkg-remove () {
-    # remove "remove" from parameter
-    shift
+  # remove "remove" from parameter
+  shift
 
-    select-then-remove () {
-        local result=`ls $PACKAGE | fzy`
-        if [ ! -z "$result" ]; then
-            sudo removepkg $result
-        fi
-    }
+  select-then-remove () {
+    local result=`ls $PACKAGE | fzy`
 
-    remove-current () {
-        local result=`ls ./*t?z`
+    if [ ! -z "$result" ]; then
+      sudo removepkg $result
+    fi
+  }
 
-        if [ ! -z "$result" ]; then
-            sudo removepkg $result
-        fi
-    }
+  remove-current () {
+    local result=`ls ./*t?z`
 
-    case $1 in
-        "current")
-            remove-current
-            ;;
-        "select")
-            select-then-remove
-            ;;
-        *)
-            echo "select: select a installed package and remove"
-            echo "current: remove all package in this directory"
-            ;;
-    esac
+    if [ ! -z "$result" ]; then
+      sudo removepkg $result
+    fi
+  }
+
+  case $1 in
+    "current")
+      remove-current
+      ;;
+    "select")
+      select-then-remove
+        ;;
+    *)
+      echo "select: select a installed package and remove"
+      echo "current: remove all package in this directory"
+      ;;
+  esac
 }
 
 
 eslackpkg-download () {
-    # remove "remove" from parameter
-    shift
+  # remove "remove" from parameter
+  shift
 
-    auto-download () {
-        local select_download=""
+  auto-download () {
+    local select_download=""
 
-        local file_info=$(find . -name "*.info")
-        source $file_info
+    local file_info=$(find . -name "*.info")
+    source $file_info
 
-        if is not empty "$DOWNLOAD_x86_64"; then
-            select_download="$DOWNLOAD_x86_64"
-        else
-            select_download="$DOWNLOAD"
-        fi
+    if is not empty "$DOWNLOAD_x86_64"; then
+      select_download="$DOWNLOAD_x86_64"
+    else
+      select_download="$DOWNLOAD"
+    fi
 
 
-        for i in $select_download;
-        do
-            echo $i
-            local file_name=$(basename $i)
-            curl -L $i --output $file_name
-        done
-    }
+    for i in $select_download;
+    do
+      echo $i
+      local file_name=$(basename $i)
+      curl -L $i --output $file_name
+    done
+  }
 
-    check-md5 () {
-        local file_info=$(find . -name "*.info")
-        source $file_info
+  check-md5 () {
+    local file_info=$(find . -name "*.info")
+    source $file_info
 
-        if is file "check.md5"; then
-            rm check.md5
-        fi
-        touch check.md5
+    if is file "check.md5"; then
+      rm check.md5
+    fi
+    touch check.md5
 
-        if is not empty "$DOWNLOAD_x86_64"; then
-            select_download="$DOWNLOAD_x86_64"
-            select_md5="$MD5SUM_x86_64"
-        else
-            select_download="$DOWNLOAD"
-            select_md5="$MD5SUM"
-        fi
+    if is not empty "$DOWNLOAD_x86_64"; then
+      select_download="$DOWNLOAD_x86_64"
+      select_md5="$MD5SUM_x86_64"
+    else
+      select_download="$DOWNLOAD"
+      select_md5="$MD5SUM"
+    fi
 
-        IFS=" " read -r -a md5_array <<< "$select_md5"
-        i=0
+    IFS=" " read -r -a md5_array <<< "$select_md5"
+    i=0
 
-        for d in ${select_download[@]}
-        do
-            echo "${md5_array[i]} $(basename $d)" >> check.md5
-            i=$(echo $(($i + 1)))
-        done
-        md5sum -c check.md5
-    }
+    for d in ${select_download[@]}
+    do
+      echo "${md5_array[i]} $(basename $d)" >> check.md5
+      i=$(echo $(($i + 1)))
+    done
+    md5sum -c check.md5
+  }
 
-    case $1 in
-        "auto")
-            auto-download
-            ;;
-        "check")
-            check-md5
-            ;;
-        *)
-            echo "auto: auto download source"
-            echo "check: check package's md5"
-            return 1
-            ;;
-    esac
+  case $1 in
+    "auto")
+      auto-download
+      ;;
+    "check")
+      check-md5
+      ;;
+    *)
+      echo "auto: auto download source"
+      echo "check: check package's md5"
+      return 1
+      ;;
+  esac
 }
 
 
 eslackpkg-version () {
-    shift
+  shift
 
-    case $1 in
-        "from")
-            local FULL_PATH=$2
-            ;;
-        "select")
-            local FULL_PATH=$(find /var/log/packages/ -name '*SBo' | fzy)
-            ;;
-        *)
-            echo "from: check package version from parameter"
-            echo "select: select package and check version"
-            return 1
-            ;;
-    esac
+  case $1 in
+    "from")
+      local FULL_PATH=$2
+      ;;
+    "select")
+      local FULL_PATH=$(find /var/log/packages/ -name '*SBo' | fzy)
+      ;;
+    *)
+      echo "from: check package version from parameter"
+      echo "select: select package and check version"
+      return 1
+      ;;
+  esac
 
 
-    if is empty $FULL_PATH; then
-        echo "not select package"
-        return 1
+  if is empty $FULL_PATH; then
+    echo "not select package"
+    return 1
+  fi
+  local PACKAGE=$(basename $FULL_PATH)
+
+  IFS="-" command eval 'LINE=($(echo $PACKAGE))'
+  for i in ${LINE[@]};
+  do
+    if is version "$i";
+    then
+      local CURRENT_VERSION="$i"
+      break
+    else
+      if is empty $PACKAGE_NAME;
+      then
+        local PACKAGE_NAME="$i"
+      else
+        local PACKAGE_NAME="$PACKAGE_NAME-$i"
+      fi
     fi
-    local PACKAGE=$(basename $FULL_PATH)
+  done
 
-    IFS="-" command eval 'LINE=($(echo $PACKAGE))'
-    for i in ${LINE[@]};
-    do
-        if is version "$i";
-        then
-            local CURRENT_VERSION="$i"
-            break
-        else
-            if is empty $PACKAGE_NAME;
-            then
-                local PACKAGE_NAME="$i"
-            else
-                local PACKAGE_NAME="$PACKAGE_NAME-$i"
-            fi
-        fi
-    done
+  # This command work in bash prompt.
+  # But not work in script.
+  # find /opt/Program/ -name "$PACKAGE_NAME$*.info
+  local info_path=`find /opt/Program/ -name "$PACKAGE_NAME*.info" | grep "$PACKAGE_NAME\/"`
 
-    # This command work in bash prompt.
-    # But not work in script.
-    # find /opt/Program/ -name "$PACKAGE_NAME$*.info
-    local info_path=`find /opt/Program/ -name "$PACKAGE_NAME*.info" | grep "$PACKAGE_NAME\/"`
+  if is empty $info_path; then
+    echo "not found $PACKAGE_NAME"
+    return 1
+  fi
 
-    if is empty $info_path; then
-        echo "not found $PACKAGE_NAME"
-        return 1
-    fi
+  local package_version=`egrep -i "VERSION" $info_path \
+    | sed "s/VERSION=\"\(.*\)\"/\1/"`
 
-    local package_version=`egrep -i "VERSION" $info_path \
-        | sed "s/VERSION=\"\(.*\)\"/\1/"`
-
-    if is not eq $CURRENT_VERSION $package_version; then
-        echo "$PACKAGE"
-        echo "new: $package_version"
-        echo "current: $CURRENT_VERSION"
-        echo "-----------------------"
-    fi
+  if is not eq $CURRENT_VERSION $package_version; then
+    echo "$PACKAGE"
+    echo "new: $package_version"
+    echo "current: $CURRENT_VERSION"
+    echo "-----------------------"
+  fi
 }
 
 
 eslackpkg-set-requires () {
-local require_packages=`egrep -i "Requires" ./*.info | sed "s/REQUIRES=\"\(.*\)\"/\1/"`
-for package in $require_packages;
-do
+  local require_packages=`egrep -i "Requires" ./*.info | sed "s/REQUIRES=\"\(.*\)\"/\1/"`
+
+  for package in $require_packages;
+  do
     command pushd `find ../.. -name "$package"` > /dev/null
     eslackpkg-set-requires
-done
+  done
+}
+
+
+eslackpkg-installed-dependences() {
+  shift
+  for i in $(find $1 -name *\.tgz); do
+    find_tgz=$(find . -name $(basename $i));
+    result=$(dirname $find_tgz);
+    printf "\n-------------------\n"
+    echo "$i"
+    echo "find in"
+    echo -n $result
+  done
+  printf "\n================\ndone\n"
 }
 
 
 passing=""
 for i in $@;
 do
-    result=`echo $i | grep "="`
-    if [ ! -z "$result" ]; then
-        passing+="$result "
-    fi
+  result=`echo $i | grep "="`
+  if [ ! -z "$result" ]; then
+    passing+="$result "
+  fi
 done
 
 
 case $1 in
-    "package")
-        eslackpkg-package $@
-        ;;
-    "remove")
-        eslackpkg-remove $@
-        ;;
-    "all")
-        find $PACKAGE/*
-        ;;
-    "requires")
-        eslackpkg-set-requires
-        dirs -v
-        ;;
-    "download")
-        eslackpkg-download $@
-        ;;
-    "build")
-        USER=`whoami`
-        OUTPUT=$HOME/Software/queue/$(basename `pwd`)
-        sudo $passing TMP=$OUTPUT/SBo OUTPUT=$OUTPUT sh `ls *SlackBuild`
-        sudo chown $USER:users $OUTPUT
-        ;;
-    "install")
-        sudo upgradepkg --install-new ./*.t?z
-        ;;
-    "help")
-        help-this $0
-        ;;
-    "package-version")
-        FULL_PATH=$(find /var/log/packages/ -name '*SBo')
-        for i in $FULL_PATH;
-        do
-            eslackpkg-version version from $i
-        done
-        ;;
-    *)
-        help-this $0
-        ;;
+  "package")
+    eslackpkg-package $@
+    ;;
+  "remove")
+    eslackpkg-remove $@
+    ;;
+  "all")
+    find $PACKAGE/*
+    ;;
+  "requires")
+    eslackpkg-set-requires
+    dirs -v
+    ;;
+  "dependences")
+    eslackpkg-installed-dependences $@
+    ;;
+  "download")
+    eslackpkg-download $@
+    ;;
+  "build")
+    USER=`whoami`
+    OUTPUT=$HOME/Software/queue/$(basename `pwd`)
+    sudo $passing TMP=$OUTPUT/SBo OUTPUT=$OUTPUT sh `ls *SlackBuild`
+    sudo chown $USER:users $OUTPUT
+    ;;
+  "install")
+    sudo upgradepkg --install-new ./*.t?z
+    ;;
+  "help")
+    help-this $0
+    ;;
+  "package-version")
+    FULL_PATH=$(find /var/log/packages/ -name '*SBo')
+    for i in $FULL_PATH;
+    do
+      eslackpkg-version version from $i
+    done
+    ;;
+  *)
+    help-this $0
+    ;;
 esac

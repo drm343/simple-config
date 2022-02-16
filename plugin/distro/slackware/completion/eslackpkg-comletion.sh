@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 _eslack_completions ()
 {
-    local commands="package remove requires download build install all help package-version"
+    local commands="package remove requires dependences download build install all help package-version"
     local subcommands_remove="current select"
     local subcommands_download="auto check"
     local subcommands_package="find view"
