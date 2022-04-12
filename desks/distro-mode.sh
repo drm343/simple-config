@@ -23,15 +23,10 @@ Remove () {
     Remove_Local `find $SIMPLE_CONFIG/bin -type l`
     Remove_Local `find $SIMPLE_CONFIG/completion -type l`
 
-    DISTRO=user-custom Remove_Local `find $SIMPLE_CONFIG/enable -type l`
-    DISTRO=user-custom Remove_Local `find $SIMPLE_CONFIG/bin -type l`
-    DISTRO=user-custom Remove_Local `find $SIMPLE_CONFIG/completion -type l`
-
     echo "You need to source follow files to uninstall all function.
 Or you can create a new terminal.
 
-source $SIMPLE_CONFIG/plugin/distro/$DISTRO/uninstall
-source $SIMPLE_CONFIG/plugin/distro/user-custom/uninstall"
+source $SIMPLE_CONFIG/plugin/distro/$DISTRO/uninstall"
 }
 
 # Install distro command
@@ -59,16 +54,6 @@ Install () {
 
     Install_Local completion
     Install_Local bin
-
-    DISTRO=user-custom Install_Local enable
-
-    if is existing "$SIMPLE_CONFIG/enable/user-custom.plugin.bash";
-    then
-        DISTRO=user-custom source $SIMPLE_CONFIG/enable/$DISTRO.plugin.bash
-    fi
-
-    DISTRO=user-custom Install_Local completion
-    DISTRO=user-custom Install_Local bin
 }
 
 

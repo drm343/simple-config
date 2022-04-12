@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+. $SIMPLE_CONFIG/lib/is.sh
+
+SUCK=$SIMPLE_CONFIG/plugin/distro/ada/lib/suck.py
+
+
+if is equal "$#" 2; then
+  base=$(basename $1)
+  f_1="${base%.*}"
+  f_1=$(python3 $SUCK $f_1)
+
+  base=$(basename $2)
+  f_2="${base%.*}"
+  f_2=$(python3 $SUCK $f_2)
+
+  cp $1 $2
+  sed -i "s/procedure $f_1/procedure $f_2/" $2
+  sed -i "s/end $f_1/end $f_2/" $2
+else
+  echo "need 2 argv"
+fi
