@@ -1,6 +1,8 @@
 # simple-config
 Config for bash
 
+This project migrate to gitlab. https://gitlab.com/realnami/simple-config
+
 ## Required
 
 * bash 5.0
